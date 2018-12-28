@@ -1,0 +1,25 @@
+class Car
+types
+	public string = seq of char;
+values
+-- TODO Define values here
+instance variables
+	protected name: string := "Test";
+	protected numberOfDoors: nat := 0;
+	protected numberOfSeats: nat := 0;
+	protected milesPerGalon: real := 0.0;
+	protected pricePerDay: real := 0.0;
+	protected tripCount: nat := 0;
+	protected manufactureYear: nat := 0;
+	protected color: string := "";
+operations
+	public getName: () ==> string
+	getName() == (return self.name);
+	
+	public getNumberOfDoors: () ==> nat
+	getNumberOfDoors() == (return self.numberOfDoors); 
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Car
