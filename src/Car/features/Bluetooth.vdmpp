@@ -1,0 +1,6 @@
+class Bluetooth is subclass of Feature
+instance variables
+	protected name: string := "Bluetooth";
+	protected description: string := "This car supports bluetooth connectivity";
+	protected value: real := 1.0;
+end Bluetooth

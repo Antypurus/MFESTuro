@@ -1,0 +1,7 @@
+class Convertible is subclass of Feature
+
+instance variables
+	protected name: string := "Convertible";
+	protected description: string := "This car is a convertible";
+	protected value: real := 1.0;
+end Convertible

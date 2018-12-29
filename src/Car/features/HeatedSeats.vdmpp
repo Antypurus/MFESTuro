@@ -1,0 +1,6 @@
+class HeatedSeats is subclass of Feature
+instance variables
+	protected name: string := "Heated Seat";
+	protected description: string := "This car has heated seats";
+	protected value: real := 1.0;
+end HeatedSeats

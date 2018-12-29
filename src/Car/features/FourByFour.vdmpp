@@ -1,0 +1,6 @@
+class FourByFour is subclass of Feature
+instance variables
+	protected name: string := "4x4";
+	protected description: string := "This car has 4 weel drive";
+	protected value: real := 1.0;
+end FourByFour

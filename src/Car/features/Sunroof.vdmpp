@@ -1,0 +1,6 @@
+class Sunroof is subclass of Feature
+instance variables
+	protected name: string := "Sunroof";
+	protected description: string := "This car has a sunroof";
+	protected value: real := 1.0;
+end Sunroof

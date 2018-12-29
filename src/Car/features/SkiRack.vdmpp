@@ -1,0 +1,6 @@
+class SkiRack is subclass of Feature
+instance variables
+	protected name: string := "Ski Rack";
+	protected description: string := "This car has a ski rack";
+	protected value: real := 1.0;
+end SkiRack

@@ -1,0 +1,6 @@
+class GPS is subclass of Feature
+instance variables
+	protected name: string := "GPS";
+	protected description: string := "This car has GPS connectivity";
+	protected value: real := 1.0;
+end GPS

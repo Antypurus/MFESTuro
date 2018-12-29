@@ -1,0 +1,6 @@
+class PetFriendly is subclass of Feature
+instance variables
+	protected name: string := "Pet Friendly";
+	protected description: string := "This car is pet friendly";
+	protected value: real := 1.0;
+end PetFriendly

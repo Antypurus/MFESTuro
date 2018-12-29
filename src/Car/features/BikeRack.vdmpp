@@ -1,0 +1,6 @@
+class BikeRack is subclass of Feature
+instance variables
+	protected name: string := "Bike Rack";
+	protected description: string := "This car has a bike rack";
+	protected value: real := 1.0;
+end BikeRack

@@ -1,0 +1,6 @@
+class USB is subclass of Feature
+instance variables
+	protected name: string := "USB";
+	protected description: string := "This car has USB ports";
+	protected value: real := 1.0;
+end USB
