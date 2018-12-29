@@ -1,10 +1,12 @@
 class Car
 types
 	public string = seq of char;
+	public fuelTypeEnum = <ELECTRIC> | <GASOLINE> | <DIESEL>;
+	public vehicleTypeEnum = <REGULAR> | <SUV> | <MINIVAN> | <TRUCK> | <VAN>;
 values
 -- TODO Define values here
 instance variables
-	protected name: string := "Test";
+	protected name: string := "";
 	protected numberOfDoors: nat := 0;
 	protected numberOfSeats: nat := 0;
 	protected milesPerGalon: real := 0.0;
@@ -12,12 +14,38 @@ instance variables
 	protected tripCount: nat := 0;
 	protected manufactureYear: nat := 0;
 	protected color: string := "";
+	protected fuelType: fuelTypeEnum := <DIESEL>;
+	protected vehicleType: vehicleTypeEnum := <REGULAR>;
 operations
 	public getName: () ==> string
 	getName() == (return self.name);
 	
 	public getNumberOfDoors: () ==> nat
-	getNumberOfDoors() == (return self.numberOfDoors); 
+	getNumberOfDoors() == (return self.numberOfDoors);
+	
+	public getNumberOfSeats: () ==> nat
+	getNumberOfSeats() == (return self.numberOfSeats);
+	
+	public getMilesPerGalon: () ==> real
+	getMilesPerGalon() == (return self.milesPerGalon);
+	
+	public getPricePerDay: () ==> real
+	getPricePerDay() == (return self.pricePerDay);
+	
+	public getTripCount: () ==> nat
+	getTripCount() == (return self.tripCount);
+	
+	public getManufactureYear: () ==> nat
+	getManufactureYear() == (return self.manufactureYear);
+	
+	public getColor: () ==> string
+	getColor() == (return self.color);
+	
+	public getFuelType: () ==> fuelTypeEnum
+	getFuelType() == (return self.fuelType);
+	
+	public getVehicleType: () ==> vehicleTypeEnum
+	getVehicleType() == (return self.vehicleType);
 functions
 -- TODO Define functiones here
 traces
