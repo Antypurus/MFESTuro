@@ -18,7 +18,7 @@ instance variables
 	protected fuelType: fuelTypeEnum := <DIESEL>;
 	protected vehicleType: vehicleTypeEnum := <REGULAR>;
 	protected manufacturer: Manufacturer;
-	protected features: featureSet;
+	protected features: featureSet := {};
 operations
 	public getName: () ==> string
 	getName() == (return self.name);
@@ -55,6 +55,18 @@ operations
 	
 	public getFeatures: () ==> featureSet
 	getFeatures() == (return self.features);
+	
+	public addFeatureSet: (featureSet) ==> ()
+	addFeatureSet(m_features) ==
+	(
+		features := features union m_features;
+	);
+	
+	public addFeature: (Feature) ==> ()
+	addFeature(m_feature) ==
+	(
+		features := features union {m_feature};
+	);
 functions
 -- TODO Define functiones here
 traces
