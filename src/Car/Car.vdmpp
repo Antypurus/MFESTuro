@@ -3,6 +3,7 @@ types
 	public string = seq of char;
 	public fuelTypeEnum = <ELECTRIC> | <GASOLINE> | <DIESEL>;
 	public vehicleTypeEnum = <REGULAR> | <SUV> | <MINIVAN> | <TRUCK> | <VAN>;
+	public featureSet = set of Feature;
 values
 -- TODO Define values here
 instance variables
@@ -16,6 +17,8 @@ instance variables
 	protected color: string := "";
 	protected fuelType: fuelTypeEnum := <DIESEL>;
 	protected vehicleType: vehicleTypeEnum := <REGULAR>;
+	protected manufacturer: Manufacturer;
+	protected features: featureSet;
 operations
 	public getName: () ==> string
 	getName() == (return self.name);
@@ -46,6 +49,12 @@ operations
 	
 	public getVehicleType: () ==> vehicleTypeEnum
 	getVehicleType() == (return self.vehicleType);
+	
+	public getManufacturer: () ==> Manufacturer
+	getManufacturer() == (return self.manufacturer);
+	
+	public getFeatures: () ==> featureSet
+	getFeatures() == (return self.features);
 functions
 -- TODO Define functiones here
 traces
