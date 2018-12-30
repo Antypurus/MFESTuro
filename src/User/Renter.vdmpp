@@ -1,0 +1,37 @@
+class Renter is subclass of User
+instance variables
+	private insuranceScore: nat := 0;
+	private driversLicenceID: nat := 0;
+	private passportId: nat := 0;
+	private PaymentMethod: paymentMethod;
+operations
+	public Renter: string * string * string * string * nat * nat * nat * paymentMethod ==> Renter
+	Renter(m_username,m_password,m_email,m_name,m_insurance_score,m_drivers_licence,m_passport,m_pay_type) ==
+	(
+		username := m_username;
+		password := m_password;
+		email := m_email;
+		name := m_name;
+		PaymentMethod := m_pay_type;
+		insuranceScore := m_insurance_score;
+		driversLicenceID := m_drivers_licence;
+		passportId := m_passport;
+		
+		return self
+	);
+
+	public getPaymentMethod: () ==> paymentMethod
+	getPaymentMethod() == (return self.PaymentMethod);
+	
+	public setPaymentMethod: paymentMethod ==> ()
+	setPaymentMethod(pay_method) == (PaymentMethod := pay_method);
+	
+	public getInsuranceScore: () ==> nat
+	getInsuranceScore() == (return self.insuranceScore);
+	
+	public getDriversLicenceID : () ==> nat
+	getDriversLicenceID() == (return self.driversLicenceID);
+	
+	public getPassportID: () ==> nat
+	getPassportID() == (return self.passportId);
+end Renter

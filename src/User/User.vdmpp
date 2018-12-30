@@ -1,0 +1,22 @@
+class User
+types
+	public string = seq of char;
+	public paymentMethod = <DEBIT> | <CREDIT> | <PAYPAL>;
+instance variables
+	protected username: string := "";
+	protected password: string := "";
+	protected email: string := "";
+	protected name: string := "";
+operations
+	public getUsername: () ==> string
+	getUsername() == (return self.username);
+	
+	public getEmail: () ==> string
+	getEmail() == (return self.email);
+	
+	public getName: () ==> string
+	getName() == (return self.name);
+	
+	public verifyLogin: string ==> bool
+	verifyLogin(pass) == (return pass = self.password);
+end User
