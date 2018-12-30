@@ -1,0 +1,33 @@
+class Van is subclass of Car
+values
+	private NUMBER_OF_DOORS: nat = 2;
+	private NUMBER_OF_SEATS: nat = 2;
+	private BASE_VALUE: real = 1.0;
+	private CAR_TYPE: vehicleTypeEnum = <VAN>;
+operations
+	public Van: string * real * nat * nat * string * fuelTypeEnum * Manufacturer * featureSet ==> Van
+	Van(m_name,m_milespergalon,m_trip_count,m_manufacture_year,m_color,m_fuel_type,m_manufacturer,m_features) ==
+	(
+		name := m_name;
+		milesPerGalon := m_milespergalon;
+		tripCount := m_trip_count;
+		manufactureYear := m_manufacture_year;
+		color := m_color;
+		fuelType := m_fuel_type;
+		manufacturer := m_manufacturer;
+		features := m_features;
+		numberOfDoors := NUMBER_OF_DOORS;
+		numberOfSeats := NUMBER_OF_SEATS;
+		vehicleType := CAR_TYPE;
+		
+		self.calculatePricePerDay();
+		
+		return self
+	);
+	
+	public calculatePricePerDay() == 
+	(
+		 pricePerDay := BASE_VALUE
+	)
+	post pricePerDay > 0.0;
+end Van

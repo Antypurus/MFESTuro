@@ -20,6 +20,9 @@ instance variables
 	protected manufacturer: Manufacturer;
 	protected features: featureSet := {};
 operations
+	public calculatePricePerDay() == is subclass responsibility
+	post pricePerDay > 0.0;
+
 	public getName: () ==> string
 	getName() == (return self.name);
 	

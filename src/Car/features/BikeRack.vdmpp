@@ -1,6 +1,15 @@
 class BikeRack is subclass of Feature
-instance variables
-	protected name: string := "Bike Rack";
-	protected description: string := "This car has a bike rack";
-	protected value: real := 1.0;
+values
+	private NAME: string = "Bike Rack";
+	private DESCRIPTION: string = "This car has a bike rack";
+	private VALUE: real = 1.0;
+operations
+	public BikeRack: () ==> BikeRack
+	BikeRack() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self;
+	);
 end BikeRack

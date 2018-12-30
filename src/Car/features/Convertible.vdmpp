@@ -1,7 +1,15 @@
 class Convertible is subclass of Feature
-
-instance variables
-	protected name: string := "Convertible";
-	protected description: string := "This car is a convertible";
-	protected value: real := 1.0;
+values
+	private NAME: string = "Convertible";
+	private DESCRIPTION: string = "This car is a convertible";
+	private VALUE: real = 1.0;
+operations
+	public Convertible: () ==> Convertible
+	Convertible() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self;
+	);
 end Convertible

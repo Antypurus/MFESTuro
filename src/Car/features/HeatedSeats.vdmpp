@@ -1,6 +1,15 @@
 class HeatedSeats is subclass of Feature
-instance variables
-	protected name: string := "Heated Seat";
-	protected description: string := "This car has heated seats";
-	protected value: real := 1.0;
+values
+	private NAME: string = "Heated Seat";
+	private DESCRIPTION: string = "This car has heated seats";
+	private VALUE: real = 1.0;
+operations
+	public HeatedSeats: () ==> HeatedSeats
+	HeatedSeats() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self;
+	);
 end HeatedSeats
