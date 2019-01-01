@@ -1,0 +1,26 @@
+class DeliveryOptions
+types
+	public develiveryOption = <CUSTOM_LOCATION> | <AIRPORT> | <OWNER_HOUSE>;
+instance variables
+	public deliveryOptions: set of develiveryOption := {};
+operations
+	public develiveryOptions: () ==> DeliveryOptions
+	develiveryOptions() == (return self);
+	
+	public develiveryOptions: set of develiveryOption ==> DeliveryOptions
+	develiveryOptions(t_options) == 
+	(
+		deliveryOptions := t_options;
+		return self
+	);
+	
+	public develiveryOptions: develiveryOption ==> DeliveryOptions
+	develiveryOptions(t_option) == 
+	(
+		deliveryOptions := {t_option};
+		return self
+	);
+	
+	public getDeliveryOptions: () ==> set of develiveryOption
+	getDeliveryOptions() == (return self.deliveryOptions);
+end DeliveryOptions

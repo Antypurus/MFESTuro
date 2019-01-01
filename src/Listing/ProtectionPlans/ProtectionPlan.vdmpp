@@ -1,0 +1,13 @@
+class ProtectionPlan
+types
+	public string = seq of char;
+instance variables
+	protected benefits: string := "";
+	protected revenueSplit: real := 0.0;
+operations
+	public getBenefits: () ==> string
+	getBenefits() == (return self.benefits);
+	
+	public getRevenueSplit: () ==> real
+	getRevenueSplit() == (return self.revenueSplit);
+end ProtectionPlan

@@ -1,0 +1,13 @@
+class Standard  is subclass of ProtectionPlan
+values
+	private BENEFITS: string = "";
+	private REVENUE_SPLIT: real = 0.8;
+operations
+	public Standard: () ==> Standard
+	Standard() ==
+	(
+		benefits := BENEFITS;
+		revenueSplit := REVENUE_SPLIT;
+		return self;
+	)
+end Standard

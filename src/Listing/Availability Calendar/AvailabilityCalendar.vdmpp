@@ -10,14 +10,14 @@ operations
 	public AvailabilityCalendar: dates ==> AvailabilityCalendar
 	AvailabilityCalendar(t_dates) == 
 	(
-		availableDates := availableDates union t_dates;
+		availableDates := t_dates;
 		return self
 	);
 	
 	public AvailabilityCalendar: Date ==> AvailabilityCalendar
 	AvailabilityCalendar(t_date) == 
 	(
-		availableDates := availableDates union {t_date};
+		availableDates := {t_date};
 		return self
 	);
 	
