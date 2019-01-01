@@ -1,0 +1,51 @@
+class Listing
+types
+	public string = seq of char;
+instance variables
+	private location: Location;
+	private develiveryOptions: DeliveryOptions;
+	private protectionPlan: ProtectionPlan;
+	private guidelines: string := "";
+	private parkingDetails: string := "";
+	private faqs: string := "";
+	private car: Car;
+	private availableDates: AvailabilityCalendar;
+operations
+	public Listing: Location * DeliveryOptions * ProtectionPlan * string * string * string * Car * AvailabilityCalendar ==> Listing
+	Listing(t_location,t_options,t_plan,t_guidelines,t_park_details,t_faqs,t_car,t_dates) ==
+	(
+		location := t_location;
+		develiveryOptions := t_options;
+	 	protectionPlan := t_plan;
+	 	guidelines := t_guidelines;
+		parkingDetails := t_park_details;
+		faqs := t_faqs;
+		car := t_car;
+	 	availableDates := t_dates;
+		return self;
+	);
+	
+	public getLocation: () ==> Location
+	getLocation() == (return self.location);
+	
+	public getDeliveryOptions: () ==> DeliveryOptions
+	getDeliveryOptions() == (return self.develiveryOptions);
+	
+	public getProtectionPlan: () ==> ProtectionPlan
+	getProtectionPlan() == (return self.protectionPlan);
+	
+	public getGuidelines: () ==> string
+	getGuidelines() == (return self.guidelines);
+	
+	public getParkingDetails: () ==> string
+	getParkingDetails() == (return self.parkingDetails);
+	
+	public getFAQS: () ==> string
+	getFAQS() == (return self.faqs);
+	
+	public getCar: () ==> Car
+	getCar() == (return self.car);
+	
+	public getAvailableDates: () ==> AvailabilityCalendar
+	getAvailableDates() == (return self.availableDates);
+end Listing
