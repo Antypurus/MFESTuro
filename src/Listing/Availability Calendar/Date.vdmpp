@@ -1,0 +1,31 @@
+class Date
+instance variables
+	private year:nat := 0;
+	private month:nat := 0;
+	private day:nat := 0;
+	
+operations
+	public Date: nat * nat * nat ==> Date
+	Date(t_day,t_month,t_year) ==
+	(
+		year := t_year;
+		month := t_month;
+		day := t_day;
+		return self
+	)
+	pre t_day > 0 and t_day < 31
+			and t_month > 0 and t_month < 13
+			and t_year > 0;
+			
+	public getDay: () ==> nat
+	getDay() == (return self.day);
+	
+	public getMonth: () ==> nat
+	getMonth() == (return self.month);
+	
+	public getYear: () ==> nat
+	getYear() == (return self.year);
+	
+	public cmp: Date ==> bool
+	cmp(d2) == (return (d2.day = self.day and d2.month = self.month and d2.year = self.year));
+end Date

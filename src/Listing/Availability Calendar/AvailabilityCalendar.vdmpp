@@ -1,0 +1,28 @@
+class AvailabilityCalendar
+types
+	public dates = set of Date;
+instance variables
+	private availableDates: dates := {};
+operations
+	public AvailabilityCalendar: () ==> AvailabilityCalendar
+	AvailabilityCalendar() == (return self);
+	
+	public AvailabilityCalendar: dates ==> AvailabilityCalendar
+	AvailabilityCalendar(t_dates) == 
+	(
+		availableDates := availableDates union t_dates;
+		return self
+	);
+	
+	public AvailabilityCalendar: Date ==> AvailabilityCalendar
+	AvailabilityCalendar(t_date) == 
+	(
+		availableDates := availableDates union {t_date};
+		return self
+	);
+	
+	public isDateAvailable: Date ==> bool
+	isDateAvailable(t_date) == (return t_date in set availableDates);
+	
+	
+end AvailabilityCalendar

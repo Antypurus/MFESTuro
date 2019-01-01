@@ -1,0 +1,21 @@
+class Location
+types
+	public string = seq of char;
+instance variables
+	private country: string := "";
+	private city: string := "";
+operations
+	public Location: string * string ==> Location
+	Location(t_country,t_city) ==
+	(
+		country := t_country;
+		city := t_city;
+		return self
+	);
+	
+	public getCountry: () ==> string
+	getCountry() == (return self.country);
+	
+	public getCity: () ==> string
+	getCity() == (return self.city);
+end Location
