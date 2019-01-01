@@ -21,8 +21,18 @@ operations
 		return self
 	);
 	
+	public getDates: () ==> dates
+	getDates() == (return self.availableDates);
+	
 	public isDateAvailable: Date ==> bool
 	isDateAvailable(t_date) == (return t_date in set availableDates);
 	
+	public areDatesAvailable: dates ==> bool
+	areDatesAvailable(t_dates) == (return t_dates subset availableDates);
 	
+	public removeDate: Date ==> ()
+	removeDate(t_date) == (availableDates := availableDates \ {t_date});
+	
+	public removeDates: dates ==> ()
+	removeDates(t_dates) == (availableDates := availableDates \ t_dates);
 end AvailabilityCalendar
