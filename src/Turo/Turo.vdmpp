@@ -2,35 +2,33 @@ class Turo
 types
 	public usersSet = set of User;
 	public listingSet = set of Listing;
-values
--- TODO Define values here
 instance variables
-	private Renter: userRenter;
-	private Lister: userLister;
-	protected users: usersSet := {};
-	protected listing: listingSet := {};
+	private Renters: set of Renter := {};
+	private Listers: set of Lister := {};
+	private users: usersSet := {};
+	private listing: listingSet := {};
 operations
 
 	public getUsers: () ==> usersSet
 	getUsers() == (return self.users);
 	
-	public getListing: () ==> listingSet
-	getListing() == (return self.listing);
+	public getListings: () ==> listingSet
+	getListings() == (return self.listing);
 	
-	public registerListing: listing ==> ()
-	registerListing(listing) == (Listing := listing);
+	public registerListing: Listing ==> ()
+	registerListing(t_listing) == (listing := listing union {t_listing});
 	
-	public removeListing: listing ==> () 		/*todo*/
-	removeListing(listing) == ();
+	public removeListing: Listing ==> ()
+	removeListing(t_listing) == (listing := listing \ {t_listing});
 	
-	public registerLister: userLister ==> () 
-	registerLister(lister) == (Lister := lister); 
+	public registerLister: Lister ==> () 
+	registerLister(t_lister) == (Listers := Listers union {t_lister}); 
 	
-	public registerRenter: userRenter ==> ()
-	registerRenter(renter) == (Renter := renter); 
+	public registerRenter: Renter ==> ()
+	registerRenter(t_renter) == (Renters := Renters union {t_renter}); 
 	
-	public SearchListing: location, date, date ==> ()		/*todo*/
-	SearchListing(location, date, date) == ; 
+	public SearchListing: Location * Date * Date ==> ()		/*todo*/
+	SearchListing(t_location, t_date, t_date) == (return); 
 
 functions
 -- TODO Define functiones here
