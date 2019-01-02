@@ -8,7 +8,7 @@ instance variables
 	private day:nat := 0;
 	
 operations
-	public Date: nat * nat * nat ==> Date
+	protected Date: nat * nat * nat ==> Date
 	Date(t_day,t_month,t_year) ==
 	(
 		year := t_year;
