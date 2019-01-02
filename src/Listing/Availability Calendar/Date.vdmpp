@@ -2,6 +2,11 @@ class Date
 types
 	public string = seq of char;
 	
+values
+	private days_in_month: nat = 30;
+	private months_in_year: nat = 12;
+	private day_in_year: nat = days_in_month * months_in_year;
+	
 instance variables
 	private year:nat := 0;
 	private month:nat := 0;
@@ -38,4 +43,40 @@ operations
 		dcl ret: string := "";
 		return ret
 	);
+	
+	private daysSinceStart: () ==> nat
+	daysSinceStart() ==
+	(
+		return self.day + self.month * days_in_month + self.year * day_in_year;
+	);
+	
+	public daysToDate: Date ==> nat
+	daysToDate(t_date) ==
+	(
+		return t_date.daysSinceStart() - self.daysSinceStart();
+	);
+	
+	public getNextDay: () ==> Date
+	getNextDay() == 
+	(
+		dcl n_day: nat := self.day + 1;
+		dcl n_month: nat := self.month;
+		dcl n_year: nat := self.year;
+		dcl fac: DateFactory := new DateFactory();
+		
+		if(n_day > days_in_month) then
+		(
+			n_day := 1;
+			n_month := n_month + 1;
+		);
+		
+		if(n_month > months_in_year) then
+		(
+			n_month := 1;
+			n_year := n_year + 1;
+		);
+		
+		return fac.create_date(n_day,n_month,n_year);
+	)
+	
 end Date
