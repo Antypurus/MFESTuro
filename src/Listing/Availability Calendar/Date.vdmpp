@@ -1,4 +1,7 @@
 class Date
+types
+	public string = seq of char;
+	
 instance variables
 	private year:nat := 0;
 	private month:nat := 0;
@@ -26,6 +29,13 @@ operations
 	public getYear: () ==> nat
 	getYear() == (return self.year);
 	
-	public cmp: Date ==> bool
-	cmp(d2) == (return (d2.day = self.day and d2.month = self.month and d2.year = self.year));
+	public compare: Date ==> bool
+	compare(d2) == (return (d2.day = self.day and d2.month = self.month and d2.year = self.year));
+	
+	public getText: () ==> string
+	getText() == 
+	(
+		dcl ret: string := "";
+		return ret
+	);
 end Date
