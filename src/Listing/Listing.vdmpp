@@ -10,9 +10,11 @@ instance variables
 	private faqs: string := "";
 	private car: Car;
 	private availableDates: AvailabilityCalendar;
+	private hasInstantBook: bool := false;
+	private Lister: Lister;
 operations
-	public Listing: Location * DeliveryOptions * ProtectionPlan * string * string * string * Car * AvailabilityCalendar ==> Listing
-	Listing(t_location,t_options,t_plan,t_guidelines,t_park_details,t_faqs,t_car,t_dates) ==
+	public Listing: Location * DeliveryOptions * ProtectionPlan * string * string * string * Car * AvailabilityCalendar * bool * Lister==> Listing
+	Listing(t_location,t_options,t_plan,t_guidelines,t_park_details,t_faqs,t_car,t_dates,t_instant_book, t_owner) ==
 	(
 		location := t_location;
 		develiveryOptions := t_options;
@@ -22,6 +24,8 @@ operations
 		faqs := t_faqs;
 		car := t_car;
 	 	availableDates := t_dates;
+	 	hasInstantBook := t_instant_book;
+	 	Lister := t_owner;
 		return self;
 	);
 	
@@ -48,4 +52,43 @@ operations
 	
 	public getAvailableDates: () ==> AvailabilityCalendar
 	getAvailableDates() == (return self.availableDates);
+	
+	public getLister: () ==> Lister
+	getLister() == (return self.Lister);
+	
+	public requestBooking: User * Date * Date * Date ==> bool
+	requestBooking(t_booker,t_curr_date,t_start_date,t_end_date) ==
+	(
+		-- TODO: Open Active Request For The Renter
+		dcl wanted_dates: set of Date := t_start_date.getDatesTo(t_end_date);
+		dcl notification: Notification := new BookingRequestNotification(t_curr_date,t_booker,self.car,wanted_dates);
+		dcl inbox: Inbox := self.Lister.getInbox();
+		
+		if(self.availableDates.availableThrough(t_start_date,t_end_date)) then
+		(
+			inbox.registerNotification(notification);
+			return true;
+		)else
+		(
+			return false;
+		);
+	);
+	
+	public instantBook: User * Date * Date * Date ==> bool
+	instantBook(t_booker,t_curr_date,t_start_date,t_end_date) ==
+	(
+		dcl wanted_dates: set of Date := t_start_date.getDatesTo(t_end_date);
+		dcl notification: Notification := new BookingRequestNotification(t_curr_date,t_booker,self.car,wanted_dates);
+		dcl inbox: Inbox := self.Lister.getInbox();
+
+		if(self.availableDates.availableThrough(t_start_date,t_end_date)) then
+		(
+			inbox.registerNotification(notification);
+			availableDates.removeDates(wanted_dates);
+			return true;
+		)else
+		(
+			return false;
+		);
+	);
 end Listing

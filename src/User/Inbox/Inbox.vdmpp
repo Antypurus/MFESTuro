@@ -32,5 +32,11 @@ operations
 		);
 		 
 		return self.notifications;
-	)
+	);
+	
+	public registerNotification: Notification ==> ()
+	registerNotification(t_notification) ==
+	(
+		notifications := notifications union {t_notification};
+	);
 end Inbox

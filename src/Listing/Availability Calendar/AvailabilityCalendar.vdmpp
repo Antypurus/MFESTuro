@@ -39,15 +39,7 @@ operations
 	public availableThrough : Date * Date ==> bool
 	availableThrough(t_start_date,t_end_date) ==
 	(
-	  dcl curr_date: Date := t_start_date;
-		dcl wanted_dates: dates := {t_start_date};
-		dcl date_diff : nat := t_start_date.daysToDate(t_end_date);
-		
-		for i=2 to date_diff by 1 do
-		(
-			curr_date := curr_date.getNextDay();
-			wanted_dates := wanted_dates union {curr_date};
-		);
+		dcl wanted_dates: dates := t_start_date.getDatesTo(t_end_date);
 		
 		return wanted_dates subset availableDates;
 	);
