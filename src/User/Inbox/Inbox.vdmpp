@@ -1,0 +1,36 @@
+class Inbox
+types
+	public notificationSet = set of Notification;
+instance variables
+	private notifications: notificationSet := {}
+operations
+	public getAllNotifications: () ==> notificationSet
+	getAllNotifications() == (return self.notifications);
+	
+	public getNotViewedNotifications: () ==> notificationSet
+	getNotViewedNotifications() == 
+	(
+		dcl retNotifications: notificationSet := {};
+		
+		for all notification in set retNotifications do
+		(
+			if(notification.wasViewed() = false) then
+			(
+				retNotifications := retNotifications union {notification};
+			);
+		);
+		
+		return retNotifications
+	);
+	
+	public viewNotifications: () ==> notificationSet
+	viewNotifications() == 
+	(
+		for all notification in set notifications do
+		(
+			notification.setAsViewed();
+		);
+		 
+		return self.notifications;
+	)
+end Inbox
