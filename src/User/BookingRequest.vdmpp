@@ -22,9 +22,24 @@ operations
 		dcl wanted_dates: set of Date := start_date.getDatesTo(end_date);
 		if(t_user.getUsername() = listing.getLister().getUsername() and t_curr_date.daysSinceStart() < start_date.daysSinceStart() and active) then
 		(
+			-- send notification
 		  listing.getAvailableDates().removeDates(wanted_dates);
 		  active := false;
 		  renter.addBooking(new Booking(renter,listing,start_date,end_date));
+			return true;
+		)else
+		(
+			return false;
+		);
+	);
+	
+	public decline: User * Date ==> bool
+	decline(t_user,t_curr_date)==
+	(
+		if(t_user.getUsername() = listing.getLister().getUsername() and t_curr_date.daysSinceStart() < start_date.daysSinceStart() and active) then
+		(
+			-- send notification
+		  active := false;
 			return true;
 		)else
 		(
@@ -37,6 +52,7 @@ operations
 	(
 		if(t_user.getUsername() = renter.getUsername() and t_curr_date.daysSinceStart() < start_date.daysSinceStart() and active) then
 		(
+			-- send notificaion
 			active := false;
 			return true;
 		)else
