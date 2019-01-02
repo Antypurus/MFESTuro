@@ -1,0 +1,39 @@
+class Turo
+types
+	public usersSet = set of User;
+	public listingSet = set of Listing;
+values
+-- TODO Define values here
+instance variables
+	private Renter: userRenter;
+	private Lister: userLister;
+	protected users: usersSet := {};
+	protected listing: listingSet := {};
+operations
+
+	public getUsers: () ==> usersSet
+	getUsers() == (return self.users);
+	
+	public getListing: () ==> listingSet
+	getListing() == (return self.listing);
+	
+	public registerListing: listing ==> ()
+	registerListing(listing) == (Listing := listing);
+	
+	public removeListing: listing ==> () 		/*todo*/
+	removeListing(listing) == ();
+	
+	public registerLister: userLister ==> () 
+	registerLister(lister) == (Lister := lister); 
+	
+	public registerRenter: userRenter ==> ()
+	registerRenter(renter) == (Renter := renter); 
+	
+	public SearchListing: location, date, date ==> ()		/*todo*/
+	SearchListing(location, date, date) == ; 
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Turo
