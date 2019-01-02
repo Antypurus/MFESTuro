@@ -7,6 +7,7 @@ instance variables
 	protected password: string := "";
 	protected email: string := "";
 	protected name: string := "";
+	private notifications: Inbox := new Inbox();
 operations
 	public getUsername: () ==> string
 	getUsername() == (return self.username);
@@ -19,4 +20,7 @@ operations
 	
 	public verifyLogin: string ==> bool
 	verifyLogin(pass) == (return pass = self.password);
+	
+	public getInbox: () ==> Inbox
+	getInbox() == (return self.notifications);
 end User
