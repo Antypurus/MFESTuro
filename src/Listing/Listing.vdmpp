@@ -56,10 +56,10 @@ operations
 	public getLister: () ==> Lister
 	getLister() == (return self.Lister);
 	
-	public requestBooking: User * Date * Date * Date ==> bool
+	public requestBooking: Renter * Date * Date * Date ==> bool
 	requestBooking(t_booker,t_curr_date,t_start_date,t_end_date) ==
 	(
-		-- TODO: Open Active Request For The Renter
+		dcl request: BookingRequest := new BookingRequest(t_booker,self,t_start_date,t_end_date);
 		dcl wanted_dates: set of Date := t_start_date.getDatesTo(t_end_date);
 		dcl notification: Notification := new BookingRequestNotification(t_curr_date,t_booker,self.car,wanted_dates);
 		dcl inbox: Inbox := self.Lister.getInbox();
@@ -67,6 +67,8 @@ operations
 		if(self.availableDates.availableThrough(t_start_date,t_end_date)) then
 		(
 			inbox.registerNotification(notification);
+			self.Lister.addRequest(request);
+			t_booker.addRequest(request);
 			return true;
 		)else
 		(
@@ -74,10 +76,10 @@ operations
 		);
 	);
 	
-	public instantBook: User * Date * Date * Date ==> bool
+	public instantBook: Renter * Date * Date * Date ==> bool
 	instantBook(t_booker,t_curr_date,t_start_date,t_end_date) ==
 	(
-	  -- TODO: Open Active Booking To The Renter
+	  dcl booking: Booking := new Booking(t_booker,self,t_start_date,t_end_date);
 		dcl wanted_dates: set of Date := t_start_date.getDatesTo(t_end_date);
 		dcl notification: Notification := new BookingRequestNotification(t_curr_date,t_booker,self.car,wanted_dates);
 		dcl inbox: Inbox := self.Lister.getInbox();
@@ -86,6 +88,7 @@ operations
 		(
 			inbox.registerNotification(notification);
 			availableDates.removeDates(wanted_dates);
+			t_booker.addBooking(booking);
 			return true;
 		)else
 		(

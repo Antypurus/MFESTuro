@@ -44,7 +44,7 @@ operations
 		return ret
 	);
 	
-	private daysSinceStart: () ==> nat
+	public daysSinceStart: () ==> nat
 	daysSinceStart() ==
 	(
 		return self.day + self.month * days_in_month + self.year * day_in_year;

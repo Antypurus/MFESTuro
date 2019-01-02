@@ -8,6 +8,7 @@ instance variables
 	protected email: string := "";
 	protected name: string := "";
 	private notifications: Inbox := new Inbox();
+	private requests: set of BookingRequest := {};
 operations
 	public getUsername: () ==> string
 	getUsername() == (return self.username);
@@ -23,4 +24,10 @@ operations
 	
 	public getInbox: () ==> Inbox
 	getInbox() == (return self.notifications);
+	
+	public getRequests: () ==> set of BookingRequest
+	getRequests() == (return self.requests);
+	
+	public addRequest: BookingRequest ==> ()
+	addRequest(t_request) == (requests := requests union {t_request});
 end User

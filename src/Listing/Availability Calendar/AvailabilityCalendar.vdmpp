@@ -36,6 +36,9 @@ operations
 	public removeDates: dates ==> ()
 	removeDates(t_dates) == (availableDates := availableDates \ t_dates);
 	
+	public addDates: dates ==> ()
+	addDates(t_dates) == (availableDates := availableDates union t_dates);
+	
 	public availableThrough : Date * Date ==> bool
 	availableThrough(t_start_date,t_end_date) ==
 	(
