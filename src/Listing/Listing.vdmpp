@@ -77,6 +77,7 @@ operations
 	public instantBook: User * Date * Date * Date ==> bool
 	instantBook(t_booker,t_curr_date,t_start_date,t_end_date) ==
 	(
+	  -- TODO: Open Active Booking To The Renter
 		dcl wanted_dates: set of Date := t_start_date.getDatesTo(t_end_date);
 		dcl notification: Notification := new BookingRequestNotification(t_curr_date,t_booker,self.car,wanted_dates);
 		dcl inbox: Inbox := self.Lister.getInbox();
