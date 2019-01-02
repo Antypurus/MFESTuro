@@ -31,7 +31,8 @@ operations
 		(
 			return false;
 		);
-	);
+	)
+	pre active = true;
 	
 	public decline: User * Date ==> bool
 	decline(t_user,t_curr_date)==
@@ -45,7 +46,8 @@ operations
 		(
 			return false;
 		);
-	);
+	)
+	pre active = true;
 	
 	public cancel: User * Date ==> bool
 	cancel(t_user,t_curr_date)==
@@ -59,7 +61,8 @@ operations
 		(
 			return false;
 		);
-	);
+	)
+	pre active = true;
 	
 	public getRenter: () ==> Renter
 	getRenter() == (return self.renter);
