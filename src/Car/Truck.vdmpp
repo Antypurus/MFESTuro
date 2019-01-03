@@ -27,7 +27,14 @@ operations
 	
 	public calculatePricePerDay() == 
 	(
-		 pricePerDay := BASE_VALUE
+		dcl dayPrice: real := BASE_VALUE;
+		
+		for all feature in set features do
+		(
+			dayPrice := dayPrice + feature.getValue();
+		);
+		
+		pricePerDay := dayPrice;
 	)
 	post pricePerDay > 0.0;
 end Truck
