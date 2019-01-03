@@ -6,20 +6,20 @@ instance variables
 	private Renters: set of Renter := {};
 	private Listers: set of Lister := {};
 	private users: usersSet := {};
-	private listing: listingSet := {};
+	private listings: listingSet := {};
 operations
 
 	public getUsers: () ==> usersSet
 	getUsers() == (return self.users);
 	
 	public getListings: () ==> listingSet
-	getListings() == (return self.listing);
+	getListings() == (return self.listings);
 	
 	public registerListing: Listing ==> ()
-	registerListing(t_listing) == (listing := listing union {t_listing});
+	registerListing(t_listing) == (listings := listings union {t_listing});
 	
 	public removeListing: Listing ==> ()
-	removeListing(t_listing) == (listing := listing \ {t_listing});
+	removeListing(t_listing) == (listings := listings \ {t_listing});
 	
 	public registerLister: Lister ==> () 
 	registerLister(t_lister) == (Listers := Listers union {t_lister}); 
@@ -27,8 +27,25 @@ operations
 	public registerRenter: Renter ==> ()
 	registerRenter(t_renter) == (Renters := Renters union {t_renter}); 
 	
-	public SearchListing: Location * Date * Date ==> ()		/*todo*/
-	SearchListing(t_location, t_date, t_date) == (return); 
+	public SearchListing: Location * Date * Date ==> listingSet
+	SearchListing(t_location, t_start_date, t_end_date) == 
+	(
+		dcl found: listingSet := {};
+		
+		for all listing in set listings do
+		(
+			dcl lstLoc: Location := listing.getLocation();
+			if(lstLoc.getCity() = t_location.getCity() and lstLoc.getCountry() = t_location.getCountry()) then
+			(
+				if(listing.getAvailableDates().availableThrough(t_start_date,t_end_date)) then
+				(
+					found := found union {listing};
+				);
+			);
+		);
+		
+		return found;
+	); 
 
 functions
 -- TODO Define functiones here
