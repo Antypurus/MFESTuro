@@ -1,0 +1,27 @@
+class Extra
+types
+	public string = seq of char;
+instance variables
+	private name: string := "";
+	private description: string := "";
+	private cost: real := 0.0;
+operations
+	public Extra: string * string * real ==> Extra
+	Extra(t_name,t_description,t_value) ==
+	(
+		name := t_name;
+		description := t_description;
+		cost := t_value;
+		return self;
+	)
+	pre t_value > 0.0;
+	
+	public getName: () ==> string
+	getName() == (return self.name);
+	
+	public getDescription: () ==> string
+	getDescription() == (return self.description);
+	
+	public getCost: () ==> real
+	getCost() == (return self.cost);
+end Extra

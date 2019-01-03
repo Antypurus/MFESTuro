@@ -1,6 +1,7 @@
 class Listing
 types
 	public string = seq of char;
+	public extraSet = set of Extra;
 instance variables
 	private location: Location;
 	private develiveryOptions: DeliveryOptions;
@@ -12,9 +13,10 @@ instance variables
 	private availableDates: AvailabilityCalendar;
 	private hasInstantBook: bool := false;
 	private Lister: Lister;
+	private extras: extraSet := {};
 operations
-	public Listing: Location * DeliveryOptions * ProtectionPlan * string * string * string * Car * AvailabilityCalendar * bool * Lister==> Listing
-	Listing(t_location,t_options,t_plan,t_guidelines,t_park_details,t_faqs,t_car,t_dates,t_instant_book, t_owner) ==
+	public Listing: Location * DeliveryOptions * ProtectionPlan * string * string * string * Car * AvailabilityCalendar * bool * Lister * extraSet==> Listing
+	Listing(t_location,t_options,t_plan,t_guidelines,t_park_details,t_faqs,t_car,t_dates,t_instant_book, t_owner,t_extras) ==
 	(
 		location := t_location;
 		develiveryOptions := t_options;
@@ -26,6 +28,8 @@ operations
 	 	availableDates := t_dates;
 	 	hasInstantBook := t_instant_book;
 	 	Lister := t_owner;
+	 	extras:= t_extras;
+	 	
 		return self;
 	);
 	
@@ -56,12 +60,15 @@ operations
 	public getLister: () ==> Lister
 	getLister() == (return self.Lister);
 	
-	public requestBooking: Renter * Date * Date * Date ==> bool
-	requestBooking(t_booker,t_curr_date,t_start_date,t_end_date) ==
+	public getExtras: () ==> extraSet
+	getExtras() == (return self.extras);
+	
+	public requestBooking: Renter * Date * Date * Date * extraSet ==> bool
+	requestBooking(t_booker,t_curr_date,t_start_date,t_end_date,t_extras) ==
 	(
-		dcl request: BookingRequest := new BookingRequest(t_booker,self,t_start_date,t_end_date);
+		dcl request: BookingRequest := new BookingRequest(t_booker,self,t_start_date,t_end_date,t_extras);
 		dcl wanted_dates: set of Date := t_start_date.getDatesTo(t_end_date);
-		dcl notification: Notification := new BookingRequestNotification(t_curr_date,t_booker,self.car,wanted_dates);
+		dcl notification: Notification := new BookingRequestNotification(t_curr_date,t_booker,self.car,wanted_dates,t_extras,request);
 		dcl inbox: Inbox := self.Lister.getInbox();
 		
 		if(self.availableDates.availableThrough(t_start_date,t_end_date)) then
@@ -76,12 +83,12 @@ operations
 		);
 	);
 	
-	public instantBook: Renter * Date * Date * Date ==> bool
-	instantBook(t_booker,t_curr_date,t_start_date,t_end_date) ==
+	public instantBook: Renter * Date * Date * Date * extraSet==> bool
+	instantBook(t_booker,t_curr_date,t_start_date,t_end_date,t_extras) ==
 	(
-	  dcl booking: Booking := new Booking(t_booker,self,t_start_date,t_end_date);
+	  dcl booking: Booking := new Booking(t_booker,self,t_start_date,t_end_date,t_extras);
 		dcl wanted_dates: set of Date := t_start_date.getDatesTo(t_end_date);
-		dcl notification: Notification := new BookingRequestNotification(t_curr_date,t_booker,self.car,wanted_dates);
+		dcl notification: Notification := new InstantBookNotification(t_curr_date,t_booker,self.car,wanted_dates,t_extras);
 		dcl inbox: Inbox := self.Lister.getInbox();
 
 		if(self.availableDates.availableThrough(t_start_date,t_end_date)) then
@@ -94,5 +101,6 @@ operations
 		(
 			return false;
 		);
-	);
+	)
+	pre hasInstantBook = true;
 end Listing

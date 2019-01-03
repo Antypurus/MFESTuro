@@ -1,14 +1,24 @@
 class BookingRequestNotification is subclass of Notification
+types
+	public extraSet = set of Extra;
 values
 	private base_string_1: string = " has request to book the car ";
 	private base_string_2: string = " on the following days:";
+instance variables
+	private extras: extraSet := {};
+	private request: BookingRequest;
 operations
-	public BookingRequestNotification: Date * User * Car * set of Date ==> BookingRequestNotification
-	BookingRequestNotification(t_date,t_user,t_car,t_dates) ==
+	public BookingRequestNotification: Date * User * Car * set of Date * extraSet * BookingRequest==> BookingRequestNotification
+	BookingRequestNotification(t_date,t_user,t_car,t_dates,t_extras, t_request) ==
 	(
 		notificationText := ":" ^ t_user.getName() ^ base_string_1 ^ t_car.getName() ^ base_string_2;
+		extras := t_extras;
+		request := t_request;
 		date := t_date;
 		return self;
-	)
+	);
+	
+	public getRequest: () ==> BookingRequest
+	getRequest() == (return self.request);
 
 end BookingRequestNotification
