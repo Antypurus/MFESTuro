@@ -2,6 +2,7 @@ class User
 types
 	public string = seq of char;
 	public paymentMethod = <DEBIT> | <CREDIT> | <PAYPAL>;
+	public reviewSet = set of Review;
 instance variables
 	protected username: string := "";
 	protected password: string := "";
@@ -9,6 +10,7 @@ instance variables
 	protected name: string := "";
 	private notifications: Inbox := new Inbox();
 	private requests: set of BookingRequest := {};
+	private reviews: reviewSet := {};
 operations
 	public getUsername: () ==> string
 	getUsername() == (return self.username);
@@ -30,4 +32,10 @@ operations
 	
 	public addRequest: BookingRequest ==> ()
 	addRequest(t_request) == (requests := requests union {t_request});
+	
+	public addReview: Review ==> ()
+	addReview(t_review) == (reviews := reviews union {t_review});
+	
+	public getReviews: () ==> reviewSet
+	getReviews() == (return self.reviews);
 end User

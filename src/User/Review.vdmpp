@@ -1,0 +1,27 @@
+class Review
+types
+	public string = seq of char;
+instance variables
+	private reviewer: User;
+	private reviewScore: real := 0.0;
+	private reviewDescription: string := "";
+operations
+	public Review : User * real * string ==> Review
+	Review(t_reviewer,t_score,t_review) ==
+	(
+		reviewer := t_reviewer;
+		reviewScore := t_score;
+		reviewDescription := t_review;
+		return self;
+	)
+	pre t_score >= 0.0 and t_score <= 5.0;
+	
+	public getReviewer: () ==> User
+	getReviewer() == (return self.reviewer);
+	
+	public getReviewScore: () ==> real
+	getReviewScore() == (return self.reviewScore);
+	
+	public getReview: () ==> string
+	getReview() == (return self.reviewDescription);
+end Review
