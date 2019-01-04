@@ -25,7 +25,8 @@ operations
 		return self
 	);
 	
-	public calculatePricePerDay() == 
+	public calculatePricePerDay: () ==> ()
+	calculatePricePerDay() == 
 	(
 		dcl dayPrice: real := BASE_VALUE;
 		

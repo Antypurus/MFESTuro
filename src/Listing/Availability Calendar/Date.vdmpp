@@ -57,7 +57,7 @@ operations
 	);
 	
 	public getNextDay: () ==> Date
-	getNextDay() == 
+	getNextDay() ==
 	(
 		dcl n_day: nat := self.day + 1;
 		dcl n_month: nat := self.month;

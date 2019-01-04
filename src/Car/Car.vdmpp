@@ -4,8 +4,6 @@ types
 	public fuelTypeEnum = <ELECTRIC> | <GASOLINE> | <DIESEL>;
 	public vehicleTypeEnum = <REGULAR> | <SUV> | <MINIVAN> | <TRUCK> | <VAN>;
 	public featureSet = set of Feature;
-values
--- TODO Define values here
 instance variables
 	protected name: string := "";
 	protected numberOfDoors: nat := 0;
@@ -20,7 +18,8 @@ instance variables
 	protected manufacturer: Manufacturer;
 	protected features: featureSet := {};
 operations
-	public calculatePricePerDay() == is subclass responsibility
+	public calculatePricePerDay: () ==> ()
+	calculatePricePerDay() == is subclass responsibility
 	post pricePerDay > 0.0;
 
 	public getName: () ==> string
@@ -70,8 +69,4 @@ operations
 	(
 		features := features union {m_feature};
 	);
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end Car
