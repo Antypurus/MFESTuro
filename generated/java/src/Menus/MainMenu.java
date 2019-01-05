@@ -57,7 +57,8 @@ public class MainMenu {
 			{
 				case 1:
 				{
-					//nothing for now
+					TripSearch menu = new TripSearch();
+					menu.menu();
 					break;
 				}
 				case 2:
