@@ -148,6 +148,8 @@ public class Turo implements EvaluatePP {
             currUser = renter;
             sentinel.stateChanged();
 
+            userType = 1L;
+            sentinel.stateChanged();
             return true;
 
           } else {

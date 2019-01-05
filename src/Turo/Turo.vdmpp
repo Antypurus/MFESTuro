@@ -9,8 +9,8 @@ instance variables
 	private users: usersSet := {};
 	private listings: listingSet := {};
 	
-	static private currUser: User := new User();
-	static private userType: nat := 0;
+	static public currUser: User := new User();
+	static public userType: nat := 0;
 	
 	inv userType = 1 or userType = 2 or userType = 0; -- 1 -> renter 2 -> lister 0 -> not logged in
 operations
@@ -65,6 +65,7 @@ operations
 				if(renter.verifyLogin(t_password))then
 				(
 					currUser := renter;
+					userType := 1;
 					return true;
 				)else
 				(

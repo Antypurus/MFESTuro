@@ -67,7 +67,8 @@ public class MainMenu {
 				}
 				case 3:
 				{
-					//nothing for now
+					LoginAsRenterMenu menu = new LoginAsRenterMenu();
+					menu.menu();
 					break;
 				}
 				case 4:
