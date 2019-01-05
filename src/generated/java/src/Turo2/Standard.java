@@ -1,0 +1,76 @@
+package Turo2;
+
+import java.util.*;
+import org.overture.codegen.runtime.*;
+
+@SuppressWarnings("all")
+public class Standard extends ProtectionPlan implements EvaluatePP {
+
+  public static class Standard_sentinel extends ProtectionPlan_sentinel {
+    public static final int Standard = 0;
+    public static final int toString = 1;
+    public static final int getBenefits = 2;
+    public static final int getRevenueSplit = 3;
+    public static final int ProtectionPlan = 4;
+    public final int function_sum = 5;
+
+    public Standard_sentinel() {}
+
+    public Standard_sentinel(final EvaluatePP instance) {
+
+      init(instance, function_sum);
+    }
+  }
+
+  private static final String BENEFITS = "";
+  private static final Number REVENUE_SPLIT = 0.8;
+  public volatile Sentinel sentinel;
+
+  public void cg_init_Standard_1() {
+
+    sentinel = new Standard_sentinel(this);
+    benefits = Standard.BENEFITS;
+    revenueSplit = Standard.REVENUE_SPLIT;
+    return;
+  }
+
+  public Standard() {
+
+    cg_init_Standard_1();
+  }
+
+  public String toString() {
+
+    return "Standard{"
+        + "BENEFITS = "
+        + Utils.toString(BENEFITS)
+        + ", REVENUE_SPLIT = "
+        + Utils.toString(REVENUE_SPLIT)
+        + "}";
+  }
+
+  public Boolean evaluatePP(final Number fnr) {
+
+    if (Utils.equals(fnr, 0L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 1L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 2L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 3L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 4L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 5L)) {
+      return true;
+
+    } else {
+      return true;
+    }
+  }
+}
