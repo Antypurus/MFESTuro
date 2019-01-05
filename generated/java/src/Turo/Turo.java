@@ -32,8 +32,8 @@ public class Turo implements EvaluatePP {
   private volatile VDMSet Listers = SetUtil.set();
   private volatile VDMSet users = SetUtil.set();
   private volatile VDMSet listings = SetUtil.set();
-  private static volatile User currUser = new User();
-  private static volatile Number userType = 0L;
+  public static volatile User currUser = new User();
+  public static volatile Number userType = 0L;
   public volatile Sentinel sentinel;
 
   public VDMSet getUsers() {

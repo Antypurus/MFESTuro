@@ -22,10 +22,13 @@ public class MainMenu {
 	{
 		System.out.println("Main Menu:");
 		System.out.println(SEARCH);
-		System.out.println(LOGIN_LISTER);
-		System.out.println(LOGIN_RENTER);
-		System.out.println(REGISTER_LISTER);
-		System.out.println(REGISTER_RENTER);
+		if(Turo.userType.intValue() == 0)
+		{
+			System.out.println(LOGIN_LISTER);
+			System.out.println(LOGIN_RENTER);
+			System.out.println(REGISTER_LISTER);
+			System.out.println(REGISTER_RENTER);
+		}
 		System.out.println(EXIT);
 	}
 
