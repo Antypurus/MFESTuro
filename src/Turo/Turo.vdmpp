@@ -9,10 +9,10 @@ instance variables
 	private users: usersSet := {};
 	private listings: listingSet := {};
 	
-	private currUser: User := undefined;
-	private userType: nat := 1;
+	static private currUser: User := new User();
+	static private userType: nat := 0;
 	
-	inv userType = 1 or userType = 2; -- 1 -> renter 2 -> lister
+	inv userType = 1 or userType = 2 or userType = 0; -- 1 -> renter 2 -> lister 0 -> not logged in
 operations
 
 	public getUsers: () ==> usersSet
