@@ -1,5 +1,6 @@
 class Turo
 types
+	public string = seq of char;
 	public usersSet = set of User;
 	public listingSet = set of Listing;
 instance variables
@@ -7,6 +8,11 @@ instance variables
 	private Listers: set of Lister := {};
 	private users: usersSet := {};
 	private listings: listingSet := {};
+	
+	private currUser: User := undefined;
+	private userType: nat := 1;
+	
+	inv userType = 1 or userType = 2; -- 1 -> renter 2 -> lister
 operations
 
 	public getUsers: () ==> usersSet
@@ -45,7 +51,53 @@ operations
 		);
 		
 		return found;
-	); 
+	);
+	
+	public renterLogin: string * string ==> bool
+	renterLogin(t_username,t_password) ==
+	(
+		dcl ok: bool:=false;
+		
+		for all renter in set Renters do
+		(
+			if(renter.getUsername() = t_username)then
+			(
+				if(renter.verifyLogin(t_password))then
+				(
+					currUser := renter;
+					return true;
+				)else
+				(
+					return false;
+				);
+			);
+		);
+		return ok;
+	);
+		
+	public listerLogin: string * string ==> bool
+	listerLogin(t_username,t_password) ==
+	(
+		dcl ok: bool:=false;
+		
+		for all lister in set Listers do
+		(
+			if(lister.getUsername() = t_username)then
+			(
+				if(lister.verifyLogin(t_password))then
+				(
+					currUser := lister;
+					userType := 2;
+					return true;
+				)else
+				(
+					return false;
+				);
+			);
+		);
+		
+		return ok;
+	);
 
 functions
 -- TODO Define functiones here
