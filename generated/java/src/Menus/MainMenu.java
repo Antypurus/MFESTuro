@@ -1,11 +1,10 @@
 package Menus;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.Scanner;
 
 import Turo.Turo;
+import Turo.Lister;
 
 public class MainMenu {
 
@@ -95,10 +94,16 @@ public class MainMenu {
 					else if(Turo.userType.intValue() == 1)
 					{
 						//ADD LISTING MENU
+                        CreateListingMenu menu =
+                                new CreateListingMenu((Lister) Turo.currUser);
+                        menu.menu();
 					}
 					else if(Turo.userType.intValue() == 2)
 					{
 						//VIEW REQUEST MENU
+                        ViewBookingsMenu menu =
+                                new ViewBookingsMenu(Turo.currUser);
+                        menu.menu();
 					}
 					break;
 				}
