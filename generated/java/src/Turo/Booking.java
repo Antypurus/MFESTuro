@@ -65,23 +65,23 @@ public class Booking implements EvaluatePP {
     sentinel.entering(((Booking_sentinel) sentinel).cancel);
     try {
       VDMSet wanted_dates = start_date.getDatesTo(end_date);
-      Boolean andResult_2 = false;
+      Boolean andResult_12 = false;
 
       if (Utils.equals(t_user.getUsername(), renter.getUsername())) {
-        Boolean andResult_3 = false;
+        Boolean andResult_13 = false;
 
         if (t_curr_date.daysSinceStart().longValue() < start_date.daysSinceStart().longValue()) {
           if (active) {
-            andResult_3 = true;
+            andResult_13 = true;
           }
         }
 
-        if (andResult_3) {
-          andResult_2 = true;
+        if (andResult_13) {
+          andResult_12 = true;
         }
       }
 
-      if (andResult_2) {
+      if (andResult_12) {
         listing.getAvailableDates().addDates(Utils.copy(wanted_dates));
         active = false;
         sentinel.stateChanged();
@@ -158,8 +158,8 @@ public class Booking implements EvaluatePP {
     try {
       Number total = 0.0;
       total = total.doubleValue() + listing.getCar().getPricePerDay().doubleValue();
-      for (Iterator iterator_4 = extras.iterator(); iterator_4.hasNext(); ) {
-        Extra extra = (Extra) iterator_4.next();
+      for (Iterator iterator_12 = extras.iterator(); iterator_12.hasNext(); ) {
+        Extra extra = (Extra) iterator_12.next();
         total = total.doubleValue() + extra.getCost().doubleValue();
       }
       return total;

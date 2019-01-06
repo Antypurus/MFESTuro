@@ -42,8 +42,8 @@ public class Inbox implements EvaluatePP {
     sentinel.entering(((Inbox_sentinel) sentinel).getNotViewedNotifications);
     try {
       VDMSet retNotifications = SetUtil.set();
-      for (Iterator iterator_6 = retNotifications.iterator(); iterator_6.hasNext(); ) {
-        Notification notification = (Notification) iterator_6.next();
+      for (Iterator iterator_14 = retNotifications.iterator(); iterator_14.hasNext(); ) {
+        Notification notification = (Notification) iterator_14.next();
         if (Utils.equals(notification.wasViewed(), false)) {
           retNotifications = SetUtil.union(Utils.copy(retNotifications), SetUtil.set(notification));
         }
@@ -59,8 +59,8 @@ public class Inbox implements EvaluatePP {
 
     sentinel.entering(((Inbox_sentinel) sentinel).viewNotifications);
     try {
-      for (Iterator iterator_7 = notifications.iterator(); iterator_7.hasNext(); ) {
-        Notification notification = (Notification) iterator_7.next();
+      for (Iterator iterator_15 = notifications.iterator(); iterator_15.hasNext(); ) {
+        Notification notification = (Notification) iterator_15.next();
         notification.setAsViewed();
       }
       return this.notifications;

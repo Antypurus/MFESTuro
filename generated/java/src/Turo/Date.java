@@ -88,23 +88,23 @@ public class Date implements EvaluatePP {
 
     sentinel.entering(((Date_sentinel) sentinel).compare);
     try {
-      Boolean andResult_15 = false;
+      Boolean andResult_5 = false;
 
       if (Utils.equals(d2.day, this.day)) {
-        Boolean andResult_16 = false;
+        Boolean andResult_6 = false;
 
         if (Utils.equals(d2.month, this.month)) {
           if (Utils.equals(d2.year, this.year)) {
-            andResult_16 = true;
+            andResult_6 = true;
           }
         }
 
-        if (andResult_16) {
-          andResult_15 = true;
+        if (andResult_6) {
+          andResult_5 = true;
         }
       }
 
-      return andResult_15;
+      return andResult_5;
 
     } finally {
       sentinel.leaving(((Date_sentinel) sentinel).compare);

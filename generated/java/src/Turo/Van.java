@@ -2,7 +2,6 @@ package Turo;
 
 import java.util.*;
 import org.overture.codegen.runtime.*;
-import Turo.quotes.*;
 
 @SuppressWarnings("all")
 public class Van extends Car implements EvaluatePP {
@@ -39,7 +38,7 @@ public class Van extends Car implements EvaluatePP {
   private static final Number NUMBER_OF_DOORS = 2L;
   private static final Number NUMBER_OF_SEATS = 2L;
   private static final Number BASE_VALUE = 1.0;
-  private static final Object CAR_TYPE = VANQuote.getInstance();
+  private static final Object CAR_TYPE = Turo.quotes.VANQuote.getInstance();
   public volatile Sentinel sentinel;
 
   public void cg_init_Van_1(
@@ -94,8 +93,8 @@ public class Van extends Car implements EvaluatePP {
     sentinel.entering(((Van_sentinel) sentinel).calculatePricePerDay);
     try {
       Number dayPrice = Van.BASE_VALUE;
-      for (Iterator iterator_12 = features.iterator(); iterator_12.hasNext(); ) {
-        Feature feature = (Feature) iterator_12.next();
+      for (Iterator iterator_5 = features.iterator(); iterator_5.hasNext(); ) {
+        Feature feature = (Feature) iterator_5.next();
         dayPrice = dayPrice.doubleValue() + feature.getValue().doubleValue();
       }
       pricePerDay = dayPrice;

@@ -16,9 +16,13 @@ public class Turo implements EvaluatePP {
     public static final int SearchListing = 6;
     public static final int renterLogin = 7;
     public static final int listerLogin = 8;
-    public static final int Turo = 9;
-    public static final int toString = 10;
-    public final int function_sum = 11;
+    public static final int getUserListings = 9;
+    public static final int logout = 10;
+    public static final int listerExists = 11;
+    public static final int renterExists = 12;
+    public static final int Turo = 13;
+    public static final int toString = 14;
+    public final int function_sum = 15;
 
     public Turo_sentinel() {}
 
@@ -112,18 +116,18 @@ public class Turo implements EvaluatePP {
     sentinel.entering(((Turo_sentinel) sentinel).SearchListing);
     try {
       VDMSet found = SetUtil.set();
-      for (Iterator iterator_1 = listings.iterator(); iterator_1.hasNext(); ) {
-        Listing listing = (Listing) iterator_1.next();
+      for (Iterator iterator_6 = listings.iterator(); iterator_6.hasNext(); ) {
+        Listing listing = (Listing) iterator_6.next();
         Location lstLoc = listing.getLocation();
-        Boolean andResult_1 = false;
+        Boolean andResult_11 = false;
 
         if (Utils.equals(lstLoc.getCity(), t_location.getCity())) {
           if (Utils.equals(lstLoc.getCountry(), t_location.getCountry())) {
-            andResult_1 = true;
+            andResult_11 = true;
           }
         }
 
-        if (andResult_1) {
+        if (andResult_11) {
           if (listing.getAvailableDates().availableThrough(t_start_date, t_end_date)) {
             found = SetUtil.union(Utils.copy(found), SetUtil.set(listing));
           }
@@ -141,8 +145,8 @@ public class Turo implements EvaluatePP {
     sentinel.entering(((Turo_sentinel) sentinel).renterLogin);
     try {
       Boolean ok = false;
-      for (Iterator iterator_2 = Renters.iterator(); iterator_2.hasNext(); ) {
-        Renter renter = (Renter) iterator_2.next();
+      for (Iterator iterator_7 = Renters.iterator(); iterator_7.hasNext(); ) {
+        Renter renter = (Renter) iterator_7.next();
         if (Utils.equals(renter.getUsername(), t_username)) {
           if (renter.verifyLogin(t_password)) {
             currUser = renter;
@@ -150,6 +154,7 @@ public class Turo implements EvaluatePP {
 
             userType = 1L;
             sentinel.stateChanged();
+
             return true;
 
           } else {
@@ -169,8 +174,8 @@ public class Turo implements EvaluatePP {
     sentinel.entering(((Turo_sentinel) sentinel).listerLogin);
     try {
       Boolean ok = false;
-      for (Iterator iterator_3 = Listers.iterator(); iterator_3.hasNext(); ) {
-        Lister lister = (Lister) iterator_3.next();
+      for (Iterator iterator_8 = Listers.iterator(); iterator_8.hasNext(); ) {
+        Lister lister = (Lister) iterator_8.next();
         if (Utils.equals(lister.getUsername(), t_username)) {
           if (lister.verifyLogin(t_password)) {
             currUser = lister;
@@ -190,6 +195,73 @@ public class Turo implements EvaluatePP {
 
     } finally {
       sentinel.leaving(((Turo_sentinel) sentinel).listerLogin);
+    }
+  }
+
+  public VDMSet getUserListings(final String t_user) {
+
+    sentinel.entering(((Turo_sentinel) sentinel).getUserListings);
+    try {
+      VDMSet lists = SetUtil.set();
+      for (Iterator iterator_9 = listings.iterator(); iterator_9.hasNext(); ) {
+        Listing listing = (Listing) iterator_9.next();
+        if (Utils.equals(listing.getLister().getUsername(), t_user)) {
+          lists = SetUtil.union(Utils.copy(lists), SetUtil.set(listing));
+        }
+      }
+      return Utils.copy(lists);
+
+    } finally {
+      sentinel.leaving(((Turo_sentinel) sentinel).getUserListings);
+    }
+  }
+
+  public void logout() {
+
+    sentinel.entering(((Turo_sentinel) sentinel).logout);
+    try {
+      currUser = new User();
+      sentinel.stateChanged();
+
+      userType = 0L;
+      sentinel.stateChanged();
+
+    } finally {
+      sentinel.leaving(((Turo_sentinel) sentinel).logout);
+    }
+  }
+
+  public Boolean listerExists(final String t_user) {
+
+    sentinel.entering(((Turo_sentinel) sentinel).listerExists);
+    try {
+      for (Iterator iterator_10 = Listers.iterator(); iterator_10.hasNext(); ) {
+        Lister lister = (Lister) iterator_10.next();
+        if (Utils.equals(lister.getUsername(), t_user)) {
+          return true;
+        }
+      }
+      return false;
+
+    } finally {
+      sentinel.leaving(((Turo_sentinel) sentinel).listerExists);
+    }
+  }
+
+  public Boolean renterExists(final String t_user) {
+
+    sentinel.entering(((Turo_sentinel) sentinel).renterExists);
+    try {
+      for (Iterator iterator_11 = Renters.iterator(); iterator_11.hasNext(); ) {
+        Renter renter = (Renter) iterator_11.next();
+        if (Utils.equals(renter.getUsername(), t_user)) {
+          return true;
+        }
+      }
+      return false;
+
+    } finally {
+      sentinel.leaving(((Turo_sentinel) sentinel).renterExists);
     }
   }
 
@@ -249,6 +321,18 @@ public class Turo implements EvaluatePP {
       return true;
 
     } else if (Utils.equals(fnr, 10L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 11L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 12L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 13L)) {
+      return true;
+
+    } else if (Utils.equals(fnr, 14L)) {
       return true;
 
     } else {
