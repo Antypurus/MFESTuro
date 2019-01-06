@@ -1,6 +1,8 @@
 package Turo;
 
 import java.util.*;
+
+import Turo.quotes.SUVQuote;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
@@ -38,7 +40,7 @@ public class SUV extends Car implements EvaluatePP {
   private static final Number NUMBER_OF_DOORS = 4L;
   private static final Number NUMBER_OF_SEATS = 5L;
   private static final Number BASE_VALUE = 1.0;
-  private static final Object CAR_TYPE = Turo.quotes.SUVQuote.getInstance();
+  private static final Object CAR_TYPE = SUVQuote.getInstance();
   public volatile Sentinel sentinel;
 
   public void cg_init_SUV_1(

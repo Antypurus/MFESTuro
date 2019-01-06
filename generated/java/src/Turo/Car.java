@@ -1,6 +1,9 @@
 package Turo;
 
 import java.util.*;
+
+import Turo.quotes.DIESELQuote;
+import Turo.quotes.REGULARQuote;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
@@ -42,8 +45,8 @@ abstract public class Car implements EvaluatePP {
   protected volatile Number tripCount = 0L;
   protected volatile Number manufactureYear = 0L;
   protected volatile String color = "";
-  protected volatile Object fuelType = Turo.quotes.DIESELQuote.getInstance();
-  protected volatile Object vehicleType = Turo.quotes.REGULARQuote.getInstance();
+  protected volatile Object fuelType = DIESELQuote.getInstance();
+  protected volatile Object vehicleType = REGULARQuote.getInstance();
   protected volatile Manufacturer manufacturer;
   protected volatile VDMSet features = SetUtil.set();
   public volatile Sentinel sentinel;

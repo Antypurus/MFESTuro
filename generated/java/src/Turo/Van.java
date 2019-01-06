@@ -1,6 +1,8 @@
 package Turo;
 
 import java.util.*;
+
+import Turo.quotes.VANQuote;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
@@ -38,7 +40,7 @@ public class Van extends Car implements EvaluatePP {
   private static final Number NUMBER_OF_DOORS = 2L;
   private static final Number NUMBER_OF_SEATS = 2L;
   private static final Number BASE_VALUE = 1.0;
-  private static final Object CAR_TYPE = Turo.quotes.VANQuote.getInstance();
+  private static final Object CAR_TYPE = VANQuote.getInstance();
   public volatile Sentinel sentinel;
 
   public void cg_init_Van_1(
