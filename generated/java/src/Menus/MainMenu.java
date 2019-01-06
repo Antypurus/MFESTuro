@@ -15,7 +15,8 @@ public class MainMenu {
 	private static final String LOGIN_RENTER = "\t3 - Login As Renter";
 	private static final String REGISTER_LISTER = "\t4 - Register As Lister";
 	private static final String REGISTER_RENTER = "\t5 - Register As Renter";
-	private static final String EXIT = "\t6- Exit";
+	private static final String LOGOUT = "\t6 - Logout";
+	private static final String EXIT = "\t7- Exit";
 
 	//lister options
 	private static final String ADD_LISTING = "\t2 - Add Listing";
@@ -44,11 +45,13 @@ public class MainMenu {
 			System.out.println(ADD_LISTING);
 			System.out.println(NOTIFICATIONS);
 			System.out.println(REQUESTS);
+            System.out.println(LOGOUT);
 		}
 		else if(Turo.userType.intValue() == 2)
 		{
 			System.out.println(VIEW_REQUESTS);
 			System.out.println(BOOKINGS);
+            System.out.println(LOGOUT);
 		}
 		System.out.println(EXIT);
 	}
@@ -57,7 +60,7 @@ public class MainMenu {
 	{
 		int op = 0;
 
-		while(op != 6)
+		while(op != 7)
 		{
 			print_menu();
 
@@ -65,7 +68,7 @@ public class MainMenu {
 			Scanner reader = new Scanner(System.in);
 			op = reader.nextInt();
 
-			while (op > 6 || op < 1)
+			while (op > 7 || op < 1)
 			{
 				System.out.println("Invalid Option\n");
 
@@ -162,6 +165,13 @@ public class MainMenu {
 					}
 					break;
 				}
+                case 6:
+                {
+                    if(Turo.userType.intValue() != 0)
+                    {
+                        system.logout();
+                    }
+                }
 			}
 		}
 	}
