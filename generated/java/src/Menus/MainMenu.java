@@ -170,6 +170,10 @@ public class MainMenu {
                     if(Turo.userType.intValue() != 0)
                     {
                         system.logout();
+                    }else
+                    {
+                        //Invalid Option
+                        System.out.println("Invalid Option\n");
                     }
                 }
 			}
