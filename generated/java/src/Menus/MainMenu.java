@@ -132,6 +132,9 @@ public class MainMenu {
 					else if(Turo.userType.intValue() == 1)
 					{
 						//REQUESTS
+						ViewBookingsMenu menu =
+								new ViewBookingsMenu(Turo.currUser);
+						menu.menu();
 					}
 					else if(Turo.userType.intValue() == 2)
 					{
