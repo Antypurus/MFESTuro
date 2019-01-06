@@ -109,10 +109,16 @@ public class MainMenu {
 					else if(Turo.userType.intValue() == 1)
 					{
 						//NOTIFICATIONS
+						ViewNotificationsMenu menu =
+								new ViewNotificationsMenu(Turo.currUser);
+						menu.menu();
 					}
 					else if(Turo.userType.intValue() == 2)
 					{
 						//BOOKINGS
+						ViewBookingsMenu menu =
+								new ViewBookingsMenu(Turo.currUser);
+						menu.menu();
 					}
 					break;
 				}
