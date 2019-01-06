@@ -54,7 +54,10 @@ public class TripSearch
         {
             System.out.println("No Results Found");
         }else {
-            System.out.println("Found Stuff");
+            for(Object listing:listings)
+            {
+                System.out.println(listing);
+            }
         }
     }
 }
