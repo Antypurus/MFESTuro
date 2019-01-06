@@ -28,10 +28,12 @@ operations
 	removeListing(t_listing) == (listings := listings \ {t_listing});
 	
 	public registerLister: Lister ==> () 
-	registerLister(t_lister) == (Listers := Listers union {t_lister}); 
+	registerLister(t_lister) == (Listers := Listers union {t_lister})
+	pre not listerExists(t_lister.getUsername());
 	
 	public registerRenter: Renter ==> ()
-	registerRenter(t_renter) == (Renters := Renters union {t_renter}); 
+	registerRenter(t_renter) == (Renters := Renters union {t_renter})
+	pre not renterExists(t_renter.getUsername());
 	
 	public SearchListing: Location * Date * Date ==> listingSet
 	SearchListing(t_location, t_start_date, t_end_date) == 
@@ -99,7 +101,60 @@ operations
 		
 		return ok;
 	);
+	
+	public getUserListings: string ==> listingSet
+	getUserListings(t_user) ==
+	(
+		dcl lists: listingSet := {};
+		
+		for all listing in set listings do
+		(
+			if(listing.getLister().getUsername() = t_user)then
+			(
+				lists := lists union {listing};
+			);
+		);
+		
+		return lists;
+	);
 
+	public logout: () ==> ()
+	logout() ==
+	(
+		currUser := new User();
+		userType := 0;
+	)
+	pre userType = 1 or userType = 2
+	post userType = 0;
+	
+	public pure listerExists: string ==> bool
+	listerExists(t_user) ==
+	(
+		for all lister in set Listers do
+		(
+			if(lister.getUsername() = t_user)then
+			(
+				return true;
+			);
+		);
+	
+		return false;
+	);
+	
+	public pure renterExists: string ==> bool
+	renterExists(t_user) ==
+	(
+		for all renter in set Renters do
+		(
+			if(renter.getUsername() = t_user)then
+			(
+				return true;
+			);
+		);
+		
+		return false;
+	)
+	
 functions
 -- TODO Define functiones here
 traces

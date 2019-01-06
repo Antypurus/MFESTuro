@@ -12,7 +12,7 @@ instance variables
 	private requests: set of BookingRequest := {};
 	private reviews: reviewSet := {};
 operations
-	public getUsername: () ==> string
+	public pure getUsername: () ==> string
 	getUsername() == (return self.username);
 	
 	public getEmail: () ==> string
