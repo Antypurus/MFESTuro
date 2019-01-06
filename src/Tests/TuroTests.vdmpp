@@ -1,0 +1,68 @@
+
+class TuroTests
+
+	instance variables
+	Turo : Turo := new Turo();
+	lister1 : Lister;
+	
+	operations
+	
+	public TuroTests: () ==> TuroTests
+				TuroTests() == (
+					return self
+				);
+				
+	private assertTrue: bool ==> ()
+    assertTrue(cond) == return
+    pre cond;
+    
+    	public testCreateTuro: () ==> ()
+    	testCreateTuro () == 
+    	(
+    		dcl Turo: Turo := new Turo();
+    		assertTrue(card Turo.getUsers() = 0);
+    		assertTrue(card Turo.getListings() = 0);
+    	);
+    	
+  		public testCreateLister: () ==> ()
+    	testCreateLister () == 
+    	(
+    		lister1 := new Lister("1","2","3","4",<DEBIT>);
+    	);
+    	
+    	public testGetsFromLister: () ==> ()
+  		testGetsFromLister () == 
+    	(
+    		assertTrue(lister1.getPaymentMethod() = <DEBIT>);
+    		assertTrue(lister1.getUsername() = "1");
+    		assertTrue(lister1.getEmail() = "3");
+    		assertTrue(lister1.verifyLogin("2"));
+    	);
+    	
+    	public testSetsFromLister: () ==> ()
+  		testSetsFromLister () == 
+    	(
+    		lister1.setPaymentMethod(<CREDIT>);
+    		assertTrue(lister1.getPaymentMethod() = <CREDIT>);
+    	);
+    	
+    	public testGetUser: () ==> ()
+    	testGetUser() == 
+    	(
+    		assertTrue(card Turo.getUsers() = 0);
+    	);
+
+
+public static main: () ==> ()
+main() ==
+(
+	dcl TuroTests: TuroTests := new TuroTests();
+	
+	TuroTests.testCreateTuro();
+	TuroTests.testCreateLister();
+	TuroTests.testGetUser();
+	TuroTests.testGetsFromLister();
+	TuroTests.testSetsFromLister();
+);
+
+end TuroTests
