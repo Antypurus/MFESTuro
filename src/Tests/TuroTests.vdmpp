@@ -15,7 +15,7 @@ class TuroTests
 	listing1: Listing;
 	van1: Van;
 	minivan1: MiniVan;
-	regulacar1: RegularCar;
+	regularcar1: RegularCar;
 	suv1: SUV;
 	truck1: Truck;
 	manufacturer1: Manufacturer;
@@ -38,6 +38,8 @@ class TuroTests
 	deliveryoption1 : DeliveryOptions;
 	extra1: Extra;
 	petfriendly1: PetFriendly;
+	notification1: Notification;
+	notification2: Notification;
 	
 	operations
 	
@@ -172,7 +174,7 @@ class TuroTests
 					suv1.calculatePricePerDay();
 					truck1 := new Truck("Truck", 100.0,0,1990,"BLUE",<GASOLINE>,manufacturer1,{});
 					truck1.calculatePricePerDay();
-					regularcar1 := new Truck("RegularCar", 100.0,0,1990,"BLUE",<GASOLINE>,manufacturer1,{});
+					regularcar1 := new RegularCar("RegularCar", 100.0,0,1990,"BLUE",<GASOLINE>,manufacturer1,{});
 					regularcar1.calculatePricePerDay();
     	);
     	
@@ -221,6 +223,7 @@ class TuroTests
     		dcl start_date2 : Date := DateFactory.create_date(2,1,2019);
 				deliveryoption1 := op.develiveryOptions(<AIRPORT>);
 				deliveryoption1 := op.develiveryOptions({<AIRPORT>});
+				assertTrue(card op.getDeliveryOptions() = 1);
     		location1 := new Location("Portugal", "Porto");
     		basic1 := new Basic();
     		premium1 := new Premium();
@@ -254,6 +257,8 @@ class TuroTests
     		assertTrue(card listing1.getExtras() = 1);
     		assertTrue(extra1.getName() = "fire");
     		assertTrue(extra1.getDescription() = "hot");
+    		assertTrue(basic1.getBenefits() = "");
+    		assertTrue(basic1.getRevenueSplit() = 0.85);
     	);
     	
     	public testCreateBooking: () ==> ()
@@ -341,6 +346,20 @@ class TuroTests
     		assertTrue(Turo.listerLogin("1","5") = false);
     	);
     	
+    	public testCreateNotification: () ==> ()
+    	testCreateNotification() ==
+    	(
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl start_date : Date := DateFactory.create_date(5,1,2019);
+    		notification1 := new InstantBookNotification(start_date,lister1,van1,{start_date},{});
+    		notification1 := new InstantBookCancellationNotification(start_date,lister1,van1);
+    		notification1 := new BookingRequestNotification(start_date,lister1,van1,{start_date},{},bookingrequest1);
+    		notification2 := new BookingRequestCancellationNotification(start_date,lister1,van1);
+    		assertTrue(notification2.getNotificationText() = ":4 has cancelled his request to book the car Van");
+    		assertTrue(notification2.getNotificationDate() = start_date);
+    		assertTrue(notification2.wasViewed() = false);
+    		notification2.setAsViewed();
+    	);
     	
 
 public static main: () ==> ()
@@ -370,6 +389,7 @@ main() ==
 	TuroTests.testTuroSets();
 	TuroTests.testTuroLoginLogout();
 	TuroTests.test_dates();
+	TuroTests.testCreateNotification();
 );
 
 end TuroTests
