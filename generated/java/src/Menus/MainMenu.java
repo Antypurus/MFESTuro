@@ -39,14 +39,14 @@ public class MainMenu {
 			System.out.println(REGISTER_LISTER);
 			System.out.println(REGISTER_RENTER);
 		}
-		else if(Turo.userType.intValue() == 1)
+		else if(Turo.userType.intValue() == 2)
 		{
 			System.out.println(ADD_LISTING);
 			System.out.println(NOTIFICATIONS);
 			System.out.println(REQUESTS);
             System.out.println(LOGOUT);
 		}
-		else if(Turo.userType.intValue() == 2)
+		else if(Turo.userType.intValue() == 1)
 		{
 			System.out.println(VIEW_REQUESTS);
 			System.out.println(BOOKINGS);
@@ -93,16 +93,16 @@ public class MainMenu {
 					}
 					else if(Turo.userType.intValue() == 1)
 					{
-						//ADD LISTING MENU
-                        CreateListingMenu menu =
-                                new CreateListingMenu((Lister) Turo.currUser);
+						//VIEW REQUEST MENU
+                        ViewBookingsMenu menu =
+                                new ViewBookingsMenu(Turo.currUser);
                         menu.menu();
 					}
 					else if(Turo.userType.intValue() == 2)
 					{
-						//VIEW REQUEST MENU
-                        ViewBookingsMenu menu =
-                                new ViewBookingsMenu(Turo.currUser);
+						//ADD LISTING MENU
+                        CreateListingMenu menu =
+                                new CreateListingMenu((Lister) Turo.currUser);
                         menu.menu();
 					}
 					break;
@@ -116,16 +116,16 @@ public class MainMenu {
 					}
 					else if(Turo.userType.intValue() == 1)
 					{
-						//NOTIFICATIONS
-						ViewNotificationsMenu menu =
-								new ViewNotificationsMenu(Turo.currUser);
+						//BOOKINGS
+						ViewBookingsMenu menu =
+								new ViewBookingsMenu(Turo.currUser);
 						menu.menu();
 					}
 					else if(Turo.userType.intValue() == 2)
 					{
-						//BOOKINGS
-						ViewBookingsMenu menu =
-								new ViewBookingsMenu(Turo.currUser);
+						//NOTIFICATIONS
+						ViewNotificationsMenu menu =
+								new ViewNotificationsMenu(Turo.currUser);
 						menu.menu();
 					}
 					break;
@@ -139,15 +139,15 @@ public class MainMenu {
 					}
 					else if(Turo.userType.intValue() == 1)
 					{
+						//Invalid Option
+						System.out.println("Invalid Option\n");
+					}
+					else if(Turo.userType.intValue() == 2)
+					{
 						//REQUESTS
 						ViewBookingRequests menu =
 								new ViewBookingRequests(Turo.currUser);
 						menu.menu();
-					}
-					else if(Turo.userType.intValue() == 2)
-					{
-						//Invalid Option
-						System.out.println("Invalid Option\n");
 					}
 					break;
 				}

@@ -33,7 +33,7 @@ public class ViewBookingRequests
             bks.add((BookingRequest) request);
         }
 
-        if(Turo.userType.intValue() != 1)return;
+        if(Turo.userType.intValue() != 2)return;
 
         System.out.println("Select 0 To Go Back");
         System.out.print("Option:");

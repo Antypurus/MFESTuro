@@ -62,7 +62,7 @@ public class TripSearch
                 lsts.add((Listing)listing);
             }
 
-            if(Turo.userType.intValue() == 0)
+            if(Turo.userType.intValue() == 0 || Turo.userType.intValue() == 2)
             {
                 return;
             }
