@@ -112,10 +112,13 @@ public class TripSearch
                     op = scanner.nextInt();
                 }
 
+                if(op != 0)
+                {
                 indexes.add(op-1);
 
                 System.out.print("Option:");
                 op = scanner.nextInt();
+                }
             }
 
             VDMSet selectedExtras = new VDMSet();

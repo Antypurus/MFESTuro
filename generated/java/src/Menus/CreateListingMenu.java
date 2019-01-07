@@ -224,10 +224,12 @@ public class CreateListingMenu
         {
             System.out.print("Available Date (dd/MM/yyyy):");
             date = reader.next();
-
+            if(!date.equals("0"))
+            {
             String[] comps = date.split("/");
             dates.add(DateFactory.create_date(Integer.parseInt(comps[0]),
                     Integer.parseInt(comps[1]),Integer.parseInt(comps[2])));
+            }
         }
         calendar.addDates(dates);
 
@@ -240,6 +242,9 @@ public class CreateListingMenu
             System.out.print("Extra Name:");
             name = reader.next();
 
+            if(!name.equals("0"))
+            {
+
             System.out.print("Extra Description:");
             String desc = reader.next();
 
@@ -247,6 +252,7 @@ public class CreateListingMenu
             double cost = reader.nextDouble();
 
             extras.add(new Extra(name,desc,cost));
+            }
         }
 
         Listing listing = new Listing(location,opts,plan,guidelines,pk,faqs,
