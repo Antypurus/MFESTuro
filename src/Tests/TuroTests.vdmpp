@@ -4,6 +4,36 @@ class TuroTests
 	instance variables
 	Turo : Turo := new Turo();
 	lister1 : Lister;
+	renter1: Renter;
+	review1: Review;
+	inbox1: Inbox;
+	requests: set of BookingRequest;
+	bookings: set of Booking;
+	booking1: Booking;
+	bookingrequest1: BookingRequest;
+	location1: Location;
+	listing1: Listing;
+	van1: Van;
+	minivan1: MiniVan;
+	suv1: SUV;
+	truck1: Truck;
+	manufacturer1: Manufacturer;
+	basic1: Basic;
+	comercialplan1: ComercialPlan;
+	premium1: Premium;
+	standard1: Standard; 
+	availabilityCalendar1: AvailabilityCalendar;
+	bikerack1: BikeRack;
+	bluetooth1 : Bluetooth;
+	convertible1: Convertible;
+	customFeature1: CustomFeature;
+	fourbyfour1: FourByFour;
+	gps1: GPS;
+	heatedSeats1: HeatedSeats;
+	skirack1: SkiRack;
+	snowtires1: SnowTires;
+	sunroof1: Sunroof;
+	usb1: USB;
 	
 	operations
 	
@@ -24,6 +54,33 @@ class TuroTests
     		assertTrue(card Turo.getListings() = 0);
     	);
     	
+    	public testCreateRenter: () ==> ()
+    	testCreateRenter () ==
+    	(
+    		renter1 := new Renter("10","20","30","40", 50, 60, 70, <DEBIT>);
+    	);
+    	
+    	public testGetsFromRenter: () ==> ()
+  		testGetsFromRenter () == 
+    	(
+    		assertTrue(renter1.getPaymentMethod() = <DEBIT>);
+    		assertTrue(renter1.getUsername() = "10");
+    		assertTrue(renter1.getEmail() = "30");
+    		assertTrue(renter1.getName() = "40");
+    		assertTrue(renter1.verifyLogin("20"));
+    		assertTrue(renter1.getInsuranceScore() = 50);
+    		assertTrue(renter1.getDriversLicenceID() = 60);
+    		assertTrue(renter1.getPassportID() = 70);
+    		bookings := renter1.getBookings();
+    	);
+    	
+    	public testSetsFromRenter: () ==> ()
+  		testSetsFromRenter () == 
+    	(
+    		renter1.setPaymentMethod(<CREDIT>);
+    		assertTrue(renter1.getPaymentMethod() = <CREDIT>);
+    	);
+    	
   		public testCreateLister: () ==> ()
     	testCreateLister () == 
     	(
@@ -36,7 +93,10 @@ class TuroTests
     		assertTrue(lister1.getPaymentMethod() = <DEBIT>);
     		assertTrue(lister1.getUsername() = "1");
     		assertTrue(lister1.getEmail() = "3");
+    		assertTrue(lister1.getName() = "4");
     		assertTrue(lister1.verifyLogin("2"));
+    		inbox1 := lister1.getInbox();
+    		requests := lister1.getRequests();
     	);
     	
     	public testSetsFromLister: () ==> ()
@@ -51,7 +111,136 @@ class TuroTests
     	(
     		assertTrue(card Turo.getUsers() = 0);
     	);
-
+    	
+    	
+    	public testCreateReview: () ==> ()
+    	testCreateReview() == 
+    	(
+    		review1 := new Review(lister1, 5.0, "Good Review");
+    		assertTrue(review1.getReviewer() = lister1);
+  			assertTrue(review1.getReviewScore() = 5.0);
+				assertTrue(review1.getReview() = "Good Review");
+				
+    	);
+    	
+    	public testGetSetReview: () ==> ()
+    	testGetSetReview() == 
+    	(
+    		lister1.addReview(review1);
+    		assertTrue(card lister1.getReviews() = 1);
+    	);
+    	
+    	public testCreateManufacturer: () ==> ()
+    	testCreateManufacturer() == 
+    	(
+    		manufacturer1 := new Manufacturer("Diogo");
+    	);
+    	
+    	public testCreateCars: () ==> ()
+    	testCreateCars() == 
+    	(
+    			bikerack1 := new BikeRack();
+    			assertTrue(bikerack1.getName() = "Bike Rack");
+    			assertTrue(bikerack1.getDescription() = "This car has a bike rack");
+  				bluetooth1 := new Bluetooth();
+					convertible1 := new Convertible();
+					customFeature1 := new CustomFeature();
+					fourbyfour1 := new FourByFour();
+					gps1 := new GPS();
+					heatedSeats1 := new HeatedSeats();
+					skirack1 := new SkiRack();
+					snowtires1 := new SnowTires();
+					sunroof1 := new Sunroof();
+					usb1 := new USB();
+    			
+    			van1:= new Van("Van", 100.0,0,1990,"BLUE",<ELECTRIC>,manufacturer1,{bikerack1, usb1});
+    			van1.calculatePricePerDay();
+					minivan1 := new MiniVan("MiniVan", 100.0,0,1990,"BLUE",<DIESEL>,manufacturer1,{});
+					minivan1.calculatePricePerDay();
+					suv1 := new SUV("SUV", 100.0,0,1990,"BLUE",<ELECTRIC>,manufacturer1,{});
+					suv1.calculatePricePerDay();
+					truck1 := new Truck("Truck", 100.0,0,1990,"BLUE",<GASOLINE>,manufacturer1,{});
+					truck1.calculatePricePerDay();
+    	);
+    	
+    	public testGetFromCars: () ==> ()
+    	testGetFromCars() == 
+    	(
+    		assertTrue(van1.getName() = "Van");
+    		assertTrue(van1.getNumberOfDoors() = 2);
+    		assertTrue(van1.getNumberOfSeats() = 2);
+    		assertTrue(van1.getMilesPerGalon() = 100.0);
+    		assertTrue(van1.getPricePerDay() = 3);
+    		assertTrue(van1.getTripCount() = 0);
+    		assertTrue(van1.getManufactureYear() = 1990);
+    		assertTrue(van1.getColor() = "BLUE");
+    		assertTrue(van1.getFuelType() = <ELECTRIC>);
+    		assertTrue(van1.getVehicleType() = <VAN>);
+    		assertTrue(van1.getManufacturer() = manufacturer1);
+    		van1.addFeatureSet({sunroof1, snowtires1});
+    		van1.addFeature(skirack1);
+    		assertTrue(van1.getVehicleType() = <VAN>);
+    		assertTrue(card van1.getFeatures() = 5);
+    	);
+    	
+    	public testCreateListing: () ==> ()
+    	testCreateListing() == 
+    	(
+    		dcl op: DeliveryOptions := new DeliveryOptions();
+				op := op.develiveryOptions(<AIRPORT>);
+    		location1 := new Location("Portugal", "Porto");
+    		basic1 := new Basic();
+    		availabilityCalendar1 := new AvailabilityCalendar();
+    		listing1 := new Listing(location1,op,basic1,"t","t","t",van1,availabilityCalendar1,true, lister1,{});
+    	);
+    	
+    	public testCreateBooking: () ==> ()
+    	testCreateBooking() == 
+    	(
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl start_date : Date := DateFactory.create_date(1,1,2019);
+    		booking1 := new Booking(renter1, listing1, start_date, start_date, {});
+    	);
+    	
+    	public testCreateBookingRequest: () ==> ()
+    	testCreateBookingRequest() == 
+    	(
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl start_date : Date := DateFactory.create_date(1,1,2019);
+    		bookingrequest1 := new BookingRequest(renter1, listing1, start_date, start_date, {});
+    		lister1.addRequest(bookingrequest1);
+    	);
+    	
+    	public testTuroSets: () ==> ()
+    	testTuroSets() == 
+    	(
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl start_date : Date := DateFactory.create_date(1,1,2019);
+    		Turo.registerListing(listing1);
+    		assertTrue(card Turo.getUserListings("1") = 1);
+    		Turo.registerLister(lister1);
+    		Turo.registerRenter(renter1);
+    		assertTrue(Turo.listerExists("1") = true);
+    		assertTrue(Turo.listerExists("0") = false);
+    		assertTrue(Turo.renterExists("10") = true);
+    		assertTrue(Turo.renterExists("00") = false);
+    		assertTrue(card Turo.SearchListing(location1, start_date,start_date) = 0);
+    		Turo.removeListing(listing1);
+    	);
+    	
+    	public testTuroLoginLogout: () ==> ()
+    	testTuroLoginLogout() ==
+    	(
+    		assertTrue(Turo.renterLogin("10","20") = true);
+    		assertTrue(Turo.listerLogin("1","2") = true);
+    		Turo.logout();
+    		assertTrue(Turo.renterLogin("6","6") = false);
+    		assertTrue(Turo.listerLogin("5","5") = false);
+    		assertTrue(Turo.renterLogin("10","6") = false);
+    		assertTrue(Turo.listerLogin("1","5") = false);
+    	);
+    	
+    	
 
 public static main: () ==> ()
 main() ==
@@ -63,6 +252,19 @@ main() ==
 	TuroTests.testGetUser();
 	TuroTests.testGetsFromLister();
 	TuroTests.testSetsFromLister();
+	TuroTests.testCreateReview();
+	TuroTests.testGetSetReview();
+	TuroTests.testCreateRenter();
+	TuroTests.testGetsFromRenter();
+	TuroTests.testSetsFromRenter();
+	TuroTests.testCreateManufacturer();
+	TuroTests.testCreateCars();
+	TuroTests.testGetFromCars();
+	TuroTests.testCreateListing();
+	TuroTests.testCreateBooking();
+	TuroTests.testCreateBookingRequest();
+	TuroTests.testTuroSets();
+	TuroTests.testTuroLoginLogout();
 );
 
 end TuroTests
