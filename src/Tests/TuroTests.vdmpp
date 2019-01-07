@@ -15,6 +15,7 @@ class TuroTests
 	listing1: Listing;
 	van1: Van;
 	minivan1: MiniVan;
+	regulacar1: RegularCar;
 	suv1: SUV;
 	truck1: Truck;
 	manufacturer1: Manufacturer;
@@ -34,6 +35,9 @@ class TuroTests
 	snowtires1: SnowTires;
 	sunroof1: Sunroof;
 	usb1: USB;
+	deliveryoption1 : DeliveryOptions;
+	extra1: Extra;
+	petfriendly1: PetFriendly;
 	
 	operations
 	
@@ -96,6 +100,8 @@ class TuroTests
     		assertTrue(lister1.getName() = "4");
     		assertTrue(lister1.verifyLogin("2"));
     		inbox1 := lister1.getInbox();
+    		assertTrue(card inbox1.getNotViewedNotifications() = 0);
+    		assertTrue(card inbox1.viewNotifications() = 0);
     		requests := lister1.getRequests();
     	);
     	
@@ -134,17 +140,22 @@ class TuroTests
     	testCreateManufacturer() == 
     	(
     		manufacturer1 := new Manufacturer("Diogo");
+    		assertTrue(manufacturer1.getName() = "Diogo");
     	);
     	
     	public testCreateCars: () ==> ()
     	testCreateCars() == 
     	(
+    			comercialplan1 := new ComercialPlan();
     			bikerack1 := new BikeRack();
     			assertTrue(bikerack1.getName() = "Bike Rack");
     			assertTrue(bikerack1.getDescription() = "This car has a bike rack");
+    			petfriendly1 := new PetFriendly();
+    			assertTrue(petfriendly1.getName() = "Pet Friendly");
+    			assertTrue(petfriendly1.getDescription() = "This car is pet friendly");
   				bluetooth1 := new Bluetooth();
 					convertible1 := new Convertible();
-					customFeature1 := new CustomFeature();
+					customFeature1 := new CustomFeature("hey", "desc");
 					fourbyfour1 := new FourByFour();
 					gps1 := new GPS();
 					heatedSeats1 := new HeatedSeats();
@@ -161,6 +172,8 @@ class TuroTests
 					suv1.calculatePricePerDay();
 					truck1 := new Truck("Truck", 100.0,0,1990,"BLUE",<GASOLINE>,manufacturer1,{});
 					truck1.calculatePricePerDay();
+					regularcar1 := new Truck("RegularCar", 100.0,0,1990,"BLUE",<GASOLINE>,manufacturer1,{});
+					regularcar1.calculatePricePerDay();
     	);
     	
     	public testGetFromCars: () ==> ()
@@ -183,39 +196,127 @@ class TuroTests
     		assertTrue(card van1.getFeatures() = 5);
     	);
     	
+    	public test_dates: () ==> ()
+    	test_dates() == 
+    	(
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl date : Date := DateFactory.create_date(1,1,2019);
+    		dcl date2 : Date := DateFactory.create_date(1,2,2019);
+    		dcl nextday : Date := DateFactory.create_date(2,1,2019);
+    		assertTrue(date.getDay() = 1);
+    		assertTrue(date.getMonth() = 1);
+    		assertTrue(date.getYear() = 2019);
+    		assertTrue(date.getText() = "");
+    		assertTrue(date.getNextDay() = nextday);
+    		assertTrue(date.compare(date2) = false);
+    	);
+    	
     	public testCreateListing: () ==> ()
     	testCreateListing() == 
     	(
     		dcl op: DeliveryOptions := new DeliveryOptions();
-				op := op.develiveryOptions(<AIRPORT>);
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl date : Date := DateFactory.create_date(1,1,2019);
+    		dcl start_date1 : Date := DateFactory.create_date(1,1,2019);
+    		dcl start_date2 : Date := DateFactory.create_date(2,1,2019);
+				deliveryoption1 := op.develiveryOptions(<AIRPORT>);
+				deliveryoption1 := op.develiveryOptions({<AIRPORT>});
     		location1 := new Location("Portugal", "Porto");
     		basic1 := new Basic();
+    		premium1 := new Premium();
+    		standard1 := new Standard();
     		availabilityCalendar1 := new AvailabilityCalendar();
-    		listing1 := new Listing(location1,op,basic1,"t","t","t",van1,availabilityCalendar1,true, lister1,{});
+    		availabilityCalendar1 := new AvailabilityCalendar({start_date1, start_date2});
+    		availabilityCalendar1 := new AvailabilityCalendar(start_date1);
+    		availabilityCalendar1.removeDate(start_date1);
+    		availabilityCalendar1.addDates({start_date1, start_date2});
+    		assertTrue(availabilityCalendar1.areDatesAvailable({start_date1, start_date2}) = true);
+    		assertTrue(availabilityCalendar1.isDateAvailable(start_date1) = true);
+    		assertTrue(card availabilityCalendar1.getDates() = 2);
+    		extra1 := new Extra("fire", "hot", 1.0);
+    		listing1 := new Listing(location1,deliveryoption1,basic1,"t","t","t",van1,availabilityCalendar1,true, lister1,{extra1});
+    	);
+    	
+  		public testListingGetsSets: () ==> ()
+    	testListingGetsSets() == 
+    	(
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl date : Date := DateFactory.create_date(1,1,2019);
+    		dcl start_date : Date := DateFactory.create_date(1,1,2019);
+    		dcl end_date : Date := DateFactory.create_date(2,1,2019);
+    		assertTrue(listing1.requestBooking(renter1,date,start_date,end_date,{}) = true);
+    		assertTrue(listing1.instantBook(renter1,date,start_date,end_date,{}) = true);
+    		assertTrue(listing1.getDeliveryOptions() = deliveryoption1);
+    		assertTrue(listing1.getProtectionPlan() = basic1);
+    		assertTrue(listing1.getGuidelines() = "t");
+    		assertTrue(listing1.getFAQS() = "t");
+    		assertTrue(listing1.getCar() = van1);
+    		assertTrue(card listing1.getExtras() = 1);
+    		assertTrue(extra1.getName() = "fire");
+    		assertTrue(extra1.getDescription() = "hot");
     	);
     	
     	public testCreateBooking: () ==> ()
     	testCreateBooking() == 
     	(
     		dcl DateFactory : DateFactory := new DateFactory();
-    		dcl start_date : Date := DateFactory.create_date(1,1,2019);
-    		booking1 := new Booking(renter1, listing1, start_date, start_date, {});
+    		dcl start_date : Date := DateFactory.create_date(5,1,2019);
+    		dcl end_date : Date := DateFactory.create_date(6,1,2019);
+    		booking1 := new Booking(renter1, listing1, start_date, end_date, {extra1});
+    	);
+    	
+  		public testBookingGetsSets: () ==> ()
+    	testBookingGetsSets() == 
+    	(
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl date : Date := DateFactory.create_date(1,1,2019);
+    		dcl start_date : Date := DateFactory.create_date(5,1,2019);
+    		dcl end_date : Date := DateFactory.create_date(6,1,2019);
+    		assertTrue(booking1.getRenter() = renter1);
+    		assertTrue(booking1.getListing() = listing1);
+    		assertTrue(booking1.getStartDate() = start_date);
+    		assertTrue(booking1.getEndDate() = end_date);
+    		assertTrue(booking1.isActive() = true);
+    		assertTrue(booking1.getTotalPrice() = 4.0);
+    		assertTrue(booking1.cancel(renter1, date) = true);
+    		assertTrue(booking1.cancel(renter1, start_date) = false);
     	);
     	
     	public testCreateBookingRequest: () ==> ()
     	testCreateBookingRequest() == 
     	(
     		dcl DateFactory : DateFactory := new DateFactory();
-    		dcl start_date : Date := DateFactory.create_date(1,1,2019);
-    		bookingrequest1 := new BookingRequest(renter1, listing1, start_date, start_date, {});
+    		dcl start_date : Date := DateFactory.create_date(5,1,2019);
+    		dcl end_date : Date := DateFactory.create_date(6,1,2019);
+    		bookingrequest1 := new BookingRequest(renter1, listing1, start_date, end_date, {extra1});
     		lister1.addRequest(bookingrequest1);
+    	);
+    	
+    	public testBookingRequestGetsSets: () ==> ()
+    	testBookingRequestGetsSets() == 
+    	(
+    		dcl DateFactory : DateFactory := new DateFactory();
+    		dcl date : Date := DateFactory.create_date(1,1,2019);
+    		dcl date2 : Date := DateFactory.create_date(20,1,2019);
+    		dcl start_date : Date := DateFactory.create_date(5,1,2019);
+    		dcl end_date : Date := DateFactory.create_date(6,1,2019);
+    		assertTrue(bookingrequest1.confirm(renter1, date) = false);
+    		assertTrue(bookingrequest1.decline(renter1, date) = false);
+    		assertTrue(bookingrequest1.getRenter() = renter1);
+    		assertTrue(bookingrequest1.getListing() = listing1);
+    		assertTrue(bookingrequest1.getStartDate() = start_date);
+    		assertTrue(bookingrequest1.getEndDate() = end_date);
+    		assertTrue(bookingrequest1.isActive() = true);
+    		assertTrue(bookingrequest1.getTotalPrice() = 4.0);
+    		assertTrue(bookingrequest1.cancel(renter1, date) = true);
     	);
     	
     	public testTuroSets: () ==> ()
     	testTuroSets() == 
     	(
     		dcl DateFactory : DateFactory := new DateFactory();
-    		dcl start_date : Date := DateFactory.create_date(1,1,2019);
+    		dcl start_date : Date := DateFactory.create_date(5,1,2019);
+    		dcl end_date : Date := DateFactory.create_date(6,1,2019);
     		Turo.registerListing(listing1);
     		assertTrue(card Turo.getUserListings("1") = 1);
     		Turo.registerLister(lister1);
@@ -224,7 +325,7 @@ class TuroTests
     		assertTrue(Turo.listerExists("0") = false);
     		assertTrue(Turo.renterExists("10") = true);
     		assertTrue(Turo.renterExists("00") = false);
-    		assertTrue(card Turo.SearchListing(location1, start_date,start_date) = 0);
+    		assertTrue(card Turo.SearchListing(location1, start_date,end_date) =1);
     		Turo.removeListing(listing1);
     	);
     	
@@ -261,10 +362,14 @@ main() ==
 	TuroTests.testCreateCars();
 	TuroTests.testGetFromCars();
 	TuroTests.testCreateListing();
+	TuroTests.testListingGetsSets();
 	TuroTests.testCreateBooking();
+	TuroTests.testBookingGetsSets();
 	TuroTests.testCreateBookingRequest();
+	TuroTests.testBookingRequestGetsSets();
 	TuroTests.testTuroSets();
 	TuroTests.testTuroLoginLogout();
+	TuroTests.test_dates();
 );
 
 end TuroTests
