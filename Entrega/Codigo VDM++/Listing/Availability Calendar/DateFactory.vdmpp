@@ -1,0 +1,25 @@
+class DateFactory is subclass of Date
+types
+	private dateTuple = nat * nat * nat;
+	private datemap = map dateTuple to Date;
+
+instance variables
+	private static dates: datemap := {|->};
+operations
+	public static create_date: nat * nat * nat ==> Date
+	create_date(t_day,t_month,t_year) ==
+	(
+		if({mk_(t_day,t_month,t_year)} subset dom dates) then
+		(
+			return dates(mk_(t_day,t_month,t_year));
+		)else
+		(
+			dcl dt: Date := new Date(t_day,t_month,t_year);
+			dates := dates munion {mk_(t_day,t_month,t_year) |-> dt};
+			return dates(mk_(t_day,t_month,t_year));
+		);
+	)
+	pre t_day > 0 and t_day < 31
+			and t_month > 0 and t_month < 13
+			and t_year > 0;
+end DateFactory

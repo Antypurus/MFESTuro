@@ -1,0 +1,72 @@
+class Car
+types
+	public string = seq of char;
+	public fuelTypeEnum = <ELECTRIC> | <GASOLINE> | <DIESEL>;
+	public vehicleTypeEnum = <REGULAR> | <SUV> | <MINIVAN> | <TRUCK> | <VAN>;
+	public featureSet = set of Feature;
+instance variables
+	protected name: string := "";
+	protected numberOfDoors: nat := 0;
+	protected numberOfSeats: nat := 0;
+	protected milesPerGalon: real := 0.0;
+	protected pricePerDay: real := 0.0;
+	protected tripCount: nat := 0;
+	protected manufactureYear: nat := 0;
+	protected color: string := "";
+	protected fuelType: fuelTypeEnum := <DIESEL>;
+	protected vehicleType: vehicleTypeEnum := <REGULAR>;
+	protected manufacturer: Manufacturer;
+	protected features: featureSet := {};
+operations
+	public calculatePricePerDay: () ==> ()
+	calculatePricePerDay() == is subclass responsibility
+	post pricePerDay > 0.0;
+
+	public getName: () ==> string
+	getName() == (return self.name);
+	
+	public getNumberOfDoors: () ==> nat
+	getNumberOfDoors() == (return self.numberOfDoors);
+	
+	public getNumberOfSeats: () ==> nat
+	getNumberOfSeats() == (return self.numberOfSeats);
+	
+	public getMilesPerGalon: () ==> real
+	getMilesPerGalon() == (return self.milesPerGalon);
+	
+	public getPricePerDay: () ==> real
+	getPricePerDay() == (return self.pricePerDay);
+	
+	public getTripCount: () ==> nat
+	getTripCount() == (return self.tripCount);
+	
+	public getManufactureYear: () ==> nat
+	getManufactureYear() == (return self.manufactureYear);
+	
+	public getColor: () ==> string
+	getColor() == (return self.color);
+	
+	public getFuelType: () ==> fuelTypeEnum
+	getFuelType() == (return self.fuelType);
+	
+	public getVehicleType: () ==> vehicleTypeEnum
+	getVehicleType() == (return self.vehicleType);
+	
+	public getManufacturer: () ==> Manufacturer
+	getManufacturer() == (return self.manufacturer);
+	
+	public getFeatures: () ==> featureSet
+	getFeatures() == (return self.features);
+	
+	public addFeatureSet: (featureSet) ==> ()
+	addFeatureSet(m_features) ==
+	(
+		features := features union m_features;
+	);
+	
+	public addFeature: (Feature) ==> ()
+	addFeature(m_feature) ==
+	(
+		features := features union {m_feature};
+	);
+end Car

@@ -1,0 +1,17 @@
+class InstantBookNotification is subclass of Notification
+types
+	public extraSet = set of Extra; 
+values
+	private base_string_1: string = " has instantly booked the car ";
+	private base_string_2: string = " on the days:";
+instance variables
+	private extras: extraSet := {};
+operations
+	public InstantBookNotification: Date * User * Car * set of Date * extraSet==> InstantBookNotification
+	InstantBookNotification(t_date,t_user,t_car,t_dates,t_extras) ==
+		(
+		notificationText := ":" ^ t_user.getName() ^ base_string_1 ^ t_car.getName() ^ base_string_2;
+		date := t_date;
+		return self;
+	)
+end InstantBookNotification

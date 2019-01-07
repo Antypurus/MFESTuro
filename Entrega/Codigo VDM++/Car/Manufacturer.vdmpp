@@ -1,0 +1,17 @@
+class Manufacturer
+types
+	public string = seq of char;
+instance variables
+	private name: string := "";
+operations
+	-- constructor, takes in string representing the name of the manufacturer
+	public Manufacturer: string ==> Manufacturer
+	Manufacturer(m_name) == (
+		name := m_name;
+		return self
+	);
+	
+	-- getter for the name
+	public getName: () ==> string
+	getName() == (return self.name);
+end Manufacturer

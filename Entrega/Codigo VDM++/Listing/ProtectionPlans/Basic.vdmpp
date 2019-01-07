@@ -1,0 +1,13 @@
+class Basic is subclass of ProtectionPlan
+values
+	private BENEFITS: string = "";
+	private REVENUE_SPLIT: real = 0.85;
+operations
+	public Basic: () ==> Basic
+	Basic() ==
+	(
+		benefits := BENEFITS;
+		revenueSplit := REVENUE_SPLIT;
+		return self;
+	)
+end Basic

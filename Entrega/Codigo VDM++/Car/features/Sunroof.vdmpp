@@ -1,0 +1,15 @@
+class Sunroof is subclass of Feature
+values
+	private NAME: string = "Sunroof";
+	private DESCRIPTION: string = "This car has a sunroof";
+	private VALUE: real = 1.0;
+operations
+	public Sunroof: () ==> Sunroof
+	Sunroof() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self;
+	);
+end Sunroof

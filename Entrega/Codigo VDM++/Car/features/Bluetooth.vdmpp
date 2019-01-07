@@ -1,0 +1,15 @@
+class Bluetooth is subclass of Feature
+values
+	private NAME: string = "Bluetooth";
+	private DESCRIPTION: string = "This car supports bluetooth connectivity";
+	private VALUE: real = 1.0;
+operations
+	public Bluetooth: () ==> Bluetooth
+	Bluetooth() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self
+	);
+end Bluetooth

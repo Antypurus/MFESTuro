@@ -1,0 +1,15 @@
+class PetFriendly is subclass of Feature
+values
+	private NAME: string = "Pet Friendly";
+	private DESCRIPTION: string = "This car is pet friendly";
+	private VALUE: real = 1.0;
+operations
+	public PetFriendly: () ==> PetFriendly
+	PetFriendly() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self;
+	);
+end PetFriendly

@@ -1,0 +1,41 @@
+class User
+types
+	public string = seq of char;
+	public paymentMethod = <DEBIT> | <CREDIT> | <PAYPAL>;
+	public reviewSet = set of Review;
+instance variables
+	protected username: string := "";
+	protected password: string := "";
+	protected email: string := "";
+	protected name: string := "";
+	private notifications: Inbox := new Inbox();
+	private requests: set of BookingRequest := {};
+	private reviews: reviewSet := {};
+operations
+	public pure getUsername: () ==> string
+	getUsername() == (return self.username);
+	
+	public getEmail: () ==> string
+	getEmail() == (return self.email);
+	
+	public getName: () ==> string
+	getName() == (return self.name);
+	
+	public verifyLogin: string ==> bool
+	verifyLogin(pass) == (return pass = self.password);
+	
+	public getInbox: () ==> Inbox
+	getInbox() == (return self.notifications);
+	
+	public getRequests: () ==> set of BookingRequest
+	getRequests() == (return self.requests);
+	
+	public addRequest: BookingRequest ==> ()
+	addRequest(t_request) == (requests := requests union {t_request});
+	
+	public addReview: Review ==> ()
+	addReview(t_review) == (reviews := reviews union {t_review});
+	
+	public getReviews: () ==> reviewSet
+	getReviews() == (return self.reviews);
+end User

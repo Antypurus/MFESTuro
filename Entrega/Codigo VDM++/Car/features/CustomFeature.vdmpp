@@ -1,0 +1,12 @@
+class CustomFeature is subclass of Feature
+values
+	private VALUE: real = 1.0;
+operations
+	public CustomFeature: string * string ==> CustomFeature
+	CustomFeature(m_name,m_desc) == (
+		name := m_name;
+		description := m_desc;
+		value := VALUE;
+		return self
+	);  
+end CustomFeature

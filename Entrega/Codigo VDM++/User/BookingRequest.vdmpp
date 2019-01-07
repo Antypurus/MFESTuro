@@ -1,0 +1,100 @@
+class BookingRequest
+types
+	public extraSet = set of Extra;
+instance variables
+	private renter: Renter;
+	private listing: Listing;
+	private start_date: Date;
+	private end_date: Date;
+	private active: bool := true;
+	private extras: extraSet := {};
+operations
+	public BookingRequest: Renter * Listing * Date * Date * extraSet==> BookingRequest
+	BookingRequest(t_renter,t_listing,t_start_date,t_end_date,t_extras) ==
+	(
+		renter := t_renter;
+		listing := t_listing;
+		start_date := t_start_date;
+		end_date := t_end_date;
+		extras := t_extras;
+		return self;
+	);
+
+	public confirm: User * Date ==> bool
+	confirm(t_user,t_curr_date)==
+	(
+		dcl wanted_dates: set of Date := start_date.getDatesTo(end_date);
+		if(t_user.getUsername() = listing.getLister().getUsername() and t_curr_date.daysSinceStart() < start_date.daysSinceStart() and active) then
+		(
+			-- send notification
+		  listing.getAvailableDates().removeDates(wanted_dates);
+		  active := false;
+		  renter.addBooking(new Booking(renter,listing,start_date,end_date,extras));
+			return true;
+		)else
+		(
+			return false;
+		);
+	)
+	pre active = true;
+	
+	public decline: User * Date ==> bool
+	decline(t_user,t_curr_date)==
+	(
+		if(t_user.getUsername() = listing.getLister().getUsername() and t_curr_date.daysSinceStart() < start_date.daysSinceStart() and active) then
+		(
+			-- send notification
+		  active := false;
+			return true;
+		)else
+		(
+			return false;
+		);
+	)
+	pre active = true;
+	
+	public cancel: User * Date ==> bool
+	cancel(t_user,t_curr_date)==
+	(
+		if(t_user.getUsername() = renter.getUsername() and t_curr_date.daysSinceStart() < start_date.daysSinceStart() and active) then
+		(
+			-- send notificaion
+			active := false;
+			return true;
+		)else
+		(
+			return false;
+		);
+	)
+	pre active = true;
+	
+	public getRenter: () ==> Renter
+	getRenter() == (return self.renter);
+	
+	public getListing: () ==> Listing
+	getListing() == (return self.listing);
+	
+	public getStartDate: () ==> Date
+	getStartDate() == (return self.start_date);
+	
+	public getEndDate: () ==> Date
+	getEndDate() == (return self.end_date);
+	
+	public isActive: () ==> bool
+	isActive() == (return self.active);
+	
+	public getTotalPrice: () ==> real
+	getTotalPrice() ==
+	(
+		dcl total: real := 0.0;
+		
+		total := total + listing.getCar().getPricePerDay();
+		
+		for all extra in set extras do
+		(
+			total := total + extra.getCost();
+		);
+		
+		return total;
+	);
+end BookingRequest

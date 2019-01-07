@@ -1,0 +1,13 @@
+class Premium is subclass of ProtectionPlan
+values
+	private BENEFITS: string = "";
+	private REVENUE_SPLIT: real = 0.8;
+operations
+	public Premium: () ==> Premium
+	Premium() ==
+	(
+		benefits := BENEFITS;
+		revenueSplit := REVENUE_SPLIT;
+		return self;
+	)
+end Premium

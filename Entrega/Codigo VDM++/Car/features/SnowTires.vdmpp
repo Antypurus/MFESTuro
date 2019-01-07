@@ -1,0 +1,15 @@
+class SnowTires is subclass of Feature
+values
+	private NAME: string = "Snow Tires";
+	private DESCRIPTION: string = "This car has snow tires in case of need";
+	private VALUE: real = 1.0;
+operations
+	public SnowTires: () ==> SnowTires
+	SnowTires() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self;
+	);
+end SnowTires

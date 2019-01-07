@@ -1,0 +1,49 @@
+class AvailabilityCalendar
+types
+	public dates = set of Date;
+instance variables
+	private availableDates: dates := {};
+operations
+	public AvailabilityCalendar: () ==> AvailabilityCalendar
+	AvailabilityCalendar() == (return self);
+	
+	public AvailabilityCalendar: dates ==> AvailabilityCalendar
+	AvailabilityCalendar(t_dates) == 
+	(
+		availableDates := t_dates;
+		return self
+	);
+	
+	public AvailabilityCalendar: Date ==> AvailabilityCalendar
+	AvailabilityCalendar(t_date) == 
+	(
+		availableDates := {t_date};
+		return self
+	);
+	
+	public getDates: () ==> dates
+	getDates() == (return self.availableDates);
+	
+	public isDateAvailable: Date ==> bool
+	isDateAvailable(t_date) == (return t_date in set availableDates);
+	
+	public areDatesAvailable: dates ==> bool
+	areDatesAvailable(t_dates) == (return t_dates subset availableDates);
+	
+	public removeDate: Date ==> ()
+	removeDate(t_date) == (availableDates := availableDates \ {t_date});
+	
+	public removeDates: dates ==> ()
+	removeDates(t_dates) == (availableDates := availableDates \ t_dates);
+	
+	public addDates: dates ==> ()
+	addDates(t_dates) == (availableDates := availableDates union t_dates);
+	
+	public availableThrough : Date * Date ==> bool
+	availableThrough(t_start_date,t_end_date) ==
+	(
+		dcl wanted_dates: dates := t_start_date.getDatesTo(t_end_date);
+		
+		return wanted_dates subset availableDates;
+	);
+end AvailabilityCalendar

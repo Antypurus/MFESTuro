@@ -1,0 +1,15 @@
+class SkiRack is subclass of Feature
+values
+	private NAME: string = "Ski Rack";
+	private DESCRIPTION: string = "This car has a ski rack";
+	private VALUE: real = 1.0;
+operations
+	public SkiRack: () ==> SkiRack
+	SkiRack() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self;
+	);
+end SkiRack

@@ -1,0 +1,162 @@
+class Turo
+types
+	public string = seq of char;
+	public usersSet = set of User;
+	public listingSet = set of Listing;
+instance variables
+	private Renters: set of Renter := {};
+	private Listers: set of Lister := {};
+	private users: usersSet := {};
+	private listings: listingSet := {};
+	
+	static public currUser: User := new User();
+	static public userType: nat := 0;
+	
+	inv userType = 1 or userType = 2 or userType = 0; -- 1 -> renter 2 -> lister 0 -> not logged in
+operations
+
+	public getUsers: () ==> usersSet
+	getUsers() == (return self.users);
+	
+	public getListings: () ==> listingSet
+	getListings() == (return self.listings);
+	
+	public registerListing: Listing ==> ()
+	registerListing(t_listing) == (listings := listings union {t_listing});
+	
+	public removeListing: Listing ==> ()
+	removeListing(t_listing) == (listings := listings \ {t_listing});
+	
+	public registerLister: Lister ==> () 
+	registerLister(t_lister) == (Listers := Listers union {t_lister})
+	pre not listerExists(t_lister.getUsername());
+	
+	public registerRenter: Renter ==> ()
+	registerRenter(t_renter) == (Renters := Renters union {t_renter})
+	pre not renterExists(t_renter.getUsername());
+	
+	public SearchListing: Location * Date * Date ==> listingSet
+	SearchListing(t_location, t_start_date, t_end_date) == 
+	(
+		dcl found: listingSet := {};
+		
+		for all listing in set listings do
+		(
+			dcl lstLoc: Location := listing.getLocation();
+			if(lstLoc.getCity() = t_location.getCity() and lstLoc.getCountry() = t_location.getCountry()) then
+			(
+				if(listing.getAvailableDates().availableThrough(t_start_date,t_end_date)) then
+				(
+					found := found union {listing};
+				);
+			);
+		);
+		
+		return found;
+	);
+	
+	public renterLogin: string * string ==> bool
+	renterLogin(t_username,t_password) ==
+	(
+		dcl ok: bool:=false;
+		
+		for all renter in set Renters do
+		(
+			if(renter.getUsername() = t_username)then
+			(
+				if(renter.verifyLogin(t_password))then
+				(
+					currUser := renter;
+					userType := 1;
+					return true;
+				)else
+				(
+					return false;
+				);
+			);
+		);
+		return ok;
+	);
+		
+	public listerLogin: string * string ==> bool
+	listerLogin(t_username,t_password) ==
+	(
+		dcl ok: bool:=false;
+		
+		for all lister in set Listers do
+		(
+			if(lister.getUsername() = t_username)then
+			(
+				if(lister.verifyLogin(t_password))then
+				(
+					currUser := lister;
+					userType := 2;
+					return true;
+				)else
+				(
+					return false;
+				);
+			);
+		);
+		
+		return ok;
+	);
+	
+	public getUserListings: string ==> listingSet
+	getUserListings(t_user) ==
+	(
+		dcl lists: listingSet := {};
+		
+		for all listing in set listings do
+		(
+			if(listing.getLister().getUsername() = t_user)then
+			(
+				lists := lists union {listing};
+			);
+		);
+		
+		return lists;
+	);
+
+	public logout: () ==> ()
+	logout() ==
+	(
+		currUser := new User();
+		userType := 0;
+	)
+	pre userType = 1 or userType = 2
+	post userType = 0;
+	
+	public pure listerExists: string ==> bool
+	listerExists(t_user) ==
+	(
+		for all lister in set Listers do
+		(
+			if(lister.getUsername() = t_user)then
+			(
+				return true;
+			);
+		);
+	
+		return false;
+	);
+	
+	public pure renterExists: string ==> bool
+	renterExists(t_user) ==
+	(
+		for all renter in set Renters do
+		(
+			if(renter.getUsername() = t_user)then
+			(
+				return true;
+			);
+		);
+		
+		return false;
+	)
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Turo

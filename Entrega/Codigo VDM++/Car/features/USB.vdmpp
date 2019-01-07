@@ -1,0 +1,15 @@
+class USB is subclass of Feature
+values
+	private NAME: string = "USB";
+	private DESCRIPTION: string = "This car has USB ports";
+	private VALUE: real = 1.0;
+operations
+	public USB: () ==> USB
+	USB() ==
+	(
+		name := NAME;
+		description := DESCRIPTION;
+		value := VALUE;
+		return self
+	);
+end USB

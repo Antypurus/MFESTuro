@@ -1,0 +1,22 @@
+class Lister is subclass of User
+instance variables
+	private PaymentMethod: paymentMethod;
+operations
+	public Lister: string * string * string * string * paymentMethod ==> Lister
+	Lister(m_username,m_password,m_email,m_name,m_pay_type) ==
+	(
+		username := m_username;
+		password := m_password;
+		email := m_email;
+		name := m_name;
+		PaymentMethod := m_pay_type;
+		
+		return self
+	);
+	
+	public getPaymentMethod: () ==> paymentMethod
+	getPaymentMethod() == (return self.PaymentMethod);
+	
+	public setPaymentMethod: paymentMethod ==> ()
+	setPaymentMethod(pay_method) == (PaymentMethod := pay_method);
+end Lister

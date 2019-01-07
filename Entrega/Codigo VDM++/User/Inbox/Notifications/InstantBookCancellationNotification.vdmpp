@@ -1,0 +1,12 @@
+class InstantBookCancellationNotification is subclass of Notification
+values
+	private base_string_1: string = " has cancelled his instant book of the car ";
+operations
+	public InstantBookCancellationNotification: Date * User * Car ==> InstantBookCancellationNotification
+	InstantBookCancellationNotification(t_date,t_user,t_car) ==
+	(
+		notificationText := ":" ^ t_user.getName() ^ base_string_1 ^ t_car.getName();
+		date := t_date;
+		return self;
+	)
+end InstantBookCancellationNotification
