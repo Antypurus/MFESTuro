@@ -21,7 +21,8 @@ public class ViewNotificationsMenu
 
         for(Object notification:notifications)
         {
-            System.out.println(((Notification)notification));
+            Notification not = (Notification) notification;
+            System.out.println(not.getNotificationDate()+":"+not.getNotificationText());
         }
     }
 

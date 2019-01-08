@@ -60,7 +60,6 @@ public class ViewBookingRequests
             default:
             {
                 int selected = op -1;
-                System.out.println(bks.get(selected));
                 System.out.println("0 - Go Back");
                 System.out.println("1 - Accept");
                 System.out.println("2 - Decline");

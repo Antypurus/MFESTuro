@@ -24,9 +24,12 @@ public class ViewBookingsMenu
         for(Object booking:bookings)
         {
             Booking bk = (Booking) booking;
-            System.out.println((bks.size()+1)+":");
-            System.out.println("Booked "+bk.getListing().getCar().getName() + " from "+bk.getStartDate()+ " to "+bk.getEndDate());
-            bks.add((Booking)booking);
+            if(bk.isActive())
+            {
+                System.out.println((bks.size() + 1) + ":");
+                System.out.println("Booked " + bk.getListing().getCar().getName() + " from " + bk.getStartDate() + " to " + bk.getEndDate());
+                bks.add((Booking) booking);
+            }
         }
 
         if(bks.size()==0)return;
