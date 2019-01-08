@@ -49,7 +49,6 @@ public class ViewBookingsMenu
         }
 
         int selected = op -1;
-        System.out.println(bks.get(selected));
         System.out.println("0 - Go Back");
         System.out.println("1 - Cancel");
 
@@ -74,6 +73,7 @@ public class ViewBookingsMenu
                 Date dt =
                         DateFactory.create_date(Integer.parseInt(comps[0]),Integer.parseInt(comps[1]),Integer.parseInt(comps[2]));
                 bks.get(selected).cancel(Turo.currUser,dt);
+                System.out.println("Booking Canceled");
                 return;
             }
         }

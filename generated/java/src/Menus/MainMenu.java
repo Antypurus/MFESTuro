@@ -49,7 +49,7 @@ public class MainMenu {
 		}
 		else if(Turo.userType.intValue() == 1)
 		{
-			System.out.println(VIEW_REQUESTS);
+			//System.out.println(VIEW_REQUESTS);
 			System.out.println(BOOKINGS);
             System.out.println(LOGOUT);
 		}
@@ -76,7 +76,7 @@ public class MainMenu {
 				System.out.print("Option:");
 				op = reader.nextInt();
 			}
-
+			try{
 			switch (op)
 			{
 				case 1:
@@ -95,9 +95,12 @@ public class MainMenu {
 					else if(Turo.userType.intValue() == 1)
 					{
 						//VIEW REQUEST MENU
-                        ViewRequestBookingsMenu menu =
-                                new ViewRequestBookingsMenu((Renter) Turo.currUser);
-                        menu.menu();
+						//Invalid Option
+						System.out.println("Invalid Option\n");
+                        //ViewRequestBookingsMenu menu =
+                          //      new ViewRequestBookingsMenu((Renter) Turo
+						//      .currUser);
+                        //menu.menu();
 					}
 					else if(Turo.userType.intValue() == 2)
 					{
@@ -184,6 +187,10 @@ public class MainMenu {
                 }
 			}
 		}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}}
 	}
 
 }
