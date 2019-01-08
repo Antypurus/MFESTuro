@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import Turo.Turo;
 import Turo.Lister;
+import Turo.Renter;
 
 public class MainMenu {
 
@@ -94,8 +95,8 @@ public class MainMenu {
 					else if(Turo.userType.intValue() == 1)
 					{
 						//VIEW REQUEST MENU
-                        ViewBookingsMenu menu =
-                                new ViewBookingsMenu(Turo.currUser);
+                        ViewRequestBookingsMenu menu =
+                                new ViewRequestBookingsMenu((Renter) Turo.currUser);
                         menu.menu();
 					}
 					else if(Turo.userType.intValue() == 2)
