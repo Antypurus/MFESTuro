@@ -30,8 +30,12 @@ public class ViewBookingRequests
         {
             if(((BookingRequest)request).isActive())
             {
+                BookingRequest req = (BookingRequest)request;
                 System.out.print((bks.size() + 1) + ":");
-                System.out.println(((BookingRequest) request));
+                System.out.println(req.getRenter().getUsername() + " " +
+                        "Requested" +
+                        " to rent "+ req.getListing().getCar().getName() + " " +
+                        "from "+ req.getStartDate() + " to "+req.getEndDate());
                 bks.add((BookingRequest) request);
             }
         }
