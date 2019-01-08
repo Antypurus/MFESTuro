@@ -28,9 +28,12 @@ public class ViewRequestBookingsMenu
 
         for(Object request:requests)
         {
-            System.out.print((bks.size()+1)+":");
-            System.out.println(((BookingRequest)request));
-            bks.add((BookingRequest) request);
+            if(((BookingRequest)request).isActive())
+            {
+                System.out.print((bks.size() + 1) + ":");
+                System.out.println(((BookingRequest) request));
+                bks.add((BookingRequest) request);
+            }
         }
 
         if(bks.size()==0)return;
